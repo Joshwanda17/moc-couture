@@ -1,22 +1,44 @@
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import { useCart } from "@/contexts/CartContext";
-import { products } from "@/lib/cart";
-import product1 from "@/assets/product1.jpg";
-import product2 from "@/assets/product2.jpg";
-import product3 from "@/assets/product3.jpg";
-import product4 from "@/assets/product4.jpg";
-import product5 from "@/assets/product5.jpg";
-import product6 from "@/assets/product6.jpg";
-import product7 from "@/assets/product7.jpg";
-import product8 from "@/assets/product8.jpg";
-import product9 from "@/assets/product9.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+}
 
 const Gallery = () => {
   const { items, addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const { toast } = useToast();
 
-  const productImages = [product1, product2, product3, product4, product5, product6, product7, product8, product9];
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Error loading products",
+        description: error.message,
+      });
+    } else {
+      setProducts(data || []);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
@@ -42,7 +64,7 @@ const Gallery = () => {
             >
               <div className="aspect-square overflow-hidden bg-muted">
                 <img
-                  src={productImages[index]}
+                  src={product.image_url}
                   alt={product.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
@@ -59,7 +81,7 @@ const Gallery = () => {
                     UGX {(product.price * 3700).toLocaleString()}
                   </span>
                   <Button 
-                    onClick={() => addToCart(product)}
+                    onClick={() => addToCart({ ...product, image: product.image_url })}
                     className="bg-gradient-warm hover:opacity-90"
                   >
                     Add to Cart
