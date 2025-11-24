@@ -94,7 +94,7 @@ const Cart = () => {
                     
                     <div className="flex items-center gap-4">
                       <span className="text-xl font-bold text-primary">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        UGX {((item.price * item.quantity) * 3700).toLocaleString()}
                       </span>
                       <Button
                         size="icon"
@@ -116,7 +116,7 @@ const Cart = () => {
           <div className="space-y-4">
             <div className="flex justify-between items-center text-lg">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-semibold">${total.toFixed(2)}</span>
+              <span className="font-semibold">UGX {(total * 3700).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center text-lg">
               <span className="text-muted-foreground">Shipping</span>
@@ -125,7 +125,7 @@ const Cart = () => {
             <div className="border-t border-border pt-4">
               <div className="flex justify-between items-center text-2xl font-bold">
                 <span className="font-display">Total</span>
-                <span className="text-primary">${total.toFixed(2)}</span>
+                <span className="text-primary">UGX {(total * 3700).toLocaleString()}</span>
               </div>
             </div>
             <Button 
