@@ -31,5 +31,47 @@ export const products: Product[] = [
     price: 59.99,
     image: "/src/assets/product3.jpg",
     description: "Unique crochet and fabric decorative pillow"
+  },
+  {
+    id: "4",
+    name: "Bohemian Shawl",
+    price: 129.99,
+    image: "/src/assets/product4.jpg",
+    description: "Elegant crochet shawl with intricate lace pattern"
+  },
+  {
+    id: "5",
+    name: "Crochet Crop Top",
+    price: 79.99,
+    image: "/src/assets/product5.jpg",
+    description: "Handmade burnt orange crop top, perfect for layering"
+  },
+  {
+    id: "6",
+    name: "Wide-Leg Crochet Pants",
+    price: 159.99,
+    image: "/src/assets/product6.jpg",
+    description: "Lightweight crochet trousers with relaxed fit"
+  },
+  {
+    id: "7",
+    name: "Boho Maxi Dress",
+    price: 199.99,
+    image: "/src/assets/product7.jpg",
+    description: "Stunning crochet maxi dress with geometric patterns"
+  },
+  {
+    id: "8",
+    name: "Sunset Cardigan",
+    price: 139.99,
+    image: "/src/assets/product8.jpg",
+    description: "Cozy crochet cardigan in warm sunset tones"
+  },
+  {
+    id: "9",
+    name: "Crochet Midi Skirt",
+    price: 119.99,
+    image: "/src/assets/product9.jpg",
+    description: "Handcrafted midi skirt with delicate lace details"
   }
 ];
