@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
+# MoC Couture
 
-## Project info
+<div align="center">
+  <h3>A Digital Fashion Boutique</h3>
+  <p>Showcasing handcrafted crochet and fabric designs through curated collections, storytelling, and a premium shopping experience.</p>
+</div>
 
-**URL**: https://lovable.dev/projects/32a6b215-5ae7-4b6a-8732-84b1dcb5c3ad
+---
 
-## How can I edit this code?
+## Brand Philosophy
 
-There are several ways of editing your application.
+MoC Couture is more than an e-commerce platform; it is a digital fashion house. Our platform is designed to echo the meticulous craftsmanship of our physical pieces. We prioritize visual storytelling, editorial aesthetics, and an effortless user experience. Every interaction is tailored to reflect the luxury and care woven into our garments.
 
-**Use Lovable**
+## Platform Architecture
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/32a6b215-5ae7-4b6a-8732-84b1dcb5c3ad) and start prompting.
+The MoC Couture platform operates on a scalable, modern **Monorepo** architecture, cleanly separating the customer-facing boutique from our core API and data services.
 
-Changes made via Lovable will be committed automatically to this repo.
+### ✦ The Frontend (Client Application)
+A visually rich, highly responsive storefront and administrative portal built for performance and elegance.
+- **Framework**: React 18 & TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS & Custom CSS variables for a refined, editorial aesthetic
+- **UI Components**: Radix UI / shadcn-ui
 
-**Use your preferred IDE**
+### ✦ The Backend (API & Data)
+A robust, lightweight RESTful API server handling product catalogs, collections, and editorial media.
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: SQLite (Local development and prototyping)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Features & Ecosystem
 
-Follow these steps:
+### The Customer Experience
+- **Editorial Lookbook**: A masonry-grid layout emphasizing high-quality styling and photography.
+- **Curated Collections**: Seasonal and thematic groupings that guide the narrative of our designs.
+- **The Shop**: A comprehensive, filterable catalog of all available pieces.
+- **Brand Storytelling**: Immersive 'About' and 'Contact' portals for wholesale, bespoke commissions, and customer care.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### The Administrative House
+A secure, multi-tab administrative dashboard designed for seamless brand management:
+- **Product Management**: Complete control over inventory, pricing, and categorizations.
+- **Collection Curation**: Create and define seasonal themes, uploading editorial cover imagery, and assigning specific garments.
+- **Media Archiving**: Manage the visual assets driving the Lookbook.
+- **Boutique Settings**: Toggle store visibility and manage core brand contact configurations.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Development Guide
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Prerequisites
+Ensure your local development environment meets the following requirements:
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
+- **Git**
+
+### Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Joshwanda17/moc-couture.git
+   cd moc-couture
+   ```
+
+2. **Install all dependencies**
+   Our monorepo utilizes a single command to install dependencies across both the frontend and backend architectures:
+   ```bash
+   npm run install:all
+   ```
+
+### Running the Platform
+
+To launch the full stack (Frontend Client and Backend API) simultaneously from the root directory:
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+This command provisions:
+- The **Client Server** on `http://localhost:8080` (or the next available port).
+- The **API Server** on `http://localhost:5000`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+*Note: Upon initial backend startup, the SQLite database (`backend/database.sqlite`) is automatically provisioned with the required schema tables.*
 
-**Use GitHub Codespaces**
+### Granular Execution
+Should you need to isolate environments for specific development tasks:
+- **Frontend Isolation**: `cd frontend && npm run dev`
+- **Backend Isolation**: `cd backend && npm run dev`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## Database Schema Overview
+The current iteration leverages SQLite for rapid, persistent prototyping. The schema includes:
+- `products`: Core catalog items (pricing, status, description, featured flags).
+- `collections`: Thematic groupings (season, editorial cover, philosophy).
+- `media`: Independent visual assets utilized in the Lookbook.
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/32a6b215-5ae7-4b6a-8732-84b1dcb5c3ad) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+<div align="center">
+  <p>© 2026 MoC Couture. All rights reserved.</p>
+  <p><i>Crafted with precision. Designed for the bold.</i></p>
+</div>
