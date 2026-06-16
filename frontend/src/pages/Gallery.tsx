@@ -1,44 +1,26 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import { useCart } from "@/contexts/CartContext";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image_url: string;
-}
+import { getProducts, Product } from "@/data/mockProducts";
 
 const Gallery = () => {
   const { items, addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
-  const { toast } = useToast();
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .order("created_at", { ascending: true });
-
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error loading products",
-        description: error.message,
-      });
-    } else {
-      setProducts(data || []);
-    }
+  const fetchProducts = () => {
+    setProducts(getProducts());
   };
+
+  const categories = ["All", "Bags", "Accessories", "Clothing", "Home Décor", "Custom Pieces"];
+  const filteredProducts = activeCategory === "All" ? products : products.filter(p => p.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
@@ -55,24 +37,41 @@ const Gallery = () => {
           </p>
         </div>
 
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={activeCategory === category ? "default" : "outline"}
+              onClick={() => setActiveCategory(category)}
+              className={activeCategory === category ? "bg-gradient-warm hover:opacity-90" : ""}
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <Card 
               key={product.id}
               className="overflow-hidden hover-lift bg-card border-border/50 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="aspect-square overflow-hidden bg-muted">
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.main_image}
+                    alt={product.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </Link>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-display font-semibold mb-2">
-                  {product.name}
-                </h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3 className="text-2xl font-display font-semibold mb-2 hover:text-primary transition-colors">
+                    {product.name}
+                  </h3>
+                </Link>
                 <p className="text-muted-foreground mb-4">
                   {product.description}
                 </p>
@@ -81,10 +80,11 @@ const Gallery = () => {
                     UGX {(product.price * 3700).toLocaleString()}
                   </span>
                   <Button 
-                    onClick={() => addToCart({ ...product, image: product.image_url })}
+                    onClick={() => addToCart({ ...product, image: product.main_image })}
                     className="bg-gradient-warm hover:opacity-90"
+                    disabled={product.status === "Sold"}
                   >
-                    Add to Cart
+                    {product.status === "Sold" ? "Sold Out" : "Add to Cart"}
                   </Button>
                 </div>
               </div>

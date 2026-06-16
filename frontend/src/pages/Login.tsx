@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
@@ -19,12 +18,9 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) throw error;
+      // Mock login: Accept any login and set as admin
+      localStorage.setItem("mock_user", JSON.stringify({ email, role: "admin" }));
+      window.dispatchEvent(new Event("auth-change"));
 
       toast({
         title: "Welcome back!",

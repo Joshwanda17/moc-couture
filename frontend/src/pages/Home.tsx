@@ -4,43 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import { useCart } from "@/contexts/CartContext";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-image.jpg";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image_url: string;
-}
+import { getProducts, Product } from "@/data/mockProducts";
 
 const Home = () => {
   const { items, addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
-  const { toast } = useToast();
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .order("created_at", { ascending: true })
-      .limit(3);
-
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error loading products",
-        description: error.message,
-      });
-    } else {
-      setProducts(data || []);
-    }
+  const fetchProducts = () => {
+    const allProducts = getProducts();
+    const featured = allProducts.filter(p => p.featured).slice(0, 3);
+    setProducts(featured.length > 0 ? featured : allProducts.slice(0, 3));
   };
 
   return (
@@ -99,16 +77,20 @@ const Home = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="aspect-square overflow-hidden bg-muted">
-                  <img
-                    src={product.image_url}
-                    alt={product.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
+                  <Link to={`/product/${product.id}`}>
+                    <img
+                      src={product.main_image}
+                      alt={product.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </Link>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-display font-semibold mb-2">
-                    {product.name}
-                  </h3>
+                  <Link to={`/product/${product.id}`}>
+                    <h3 className="text-2xl font-display font-semibold mb-2 hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <p className="text-muted-foreground mb-4">
                     {product.description}
                   </p>
@@ -117,11 +99,12 @@ const Home = () => {
                       UGX {(product.price * 3700).toLocaleString()}
                     </span>
                     <Button 
-                      onClick={() => addToCart({ ...product, image: product.image_url })}
+                      onClick={() => addToCart({ ...product, image: product.main_image })}
                       variant="default"
                       className="bg-gradient-warm hover:opacity-90"
+                      disabled={product.status === "Sold"}
                     >
-                      Add to Cart
+                      {product.status === "Sold" ? "Sold Out" : "Add to Cart"}
                     </Button>
                   </div>
                 </div>

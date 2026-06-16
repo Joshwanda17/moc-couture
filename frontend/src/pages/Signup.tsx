@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const Signup = () => {
@@ -19,19 +18,14 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Account created!",
-        description: "You can now log in to your account.",
-      });
-
-      navigate("/login");
+      // Mock signup: Immediately navigate to login
+      setTimeout(() => {
+        toast({
+          title: "Account created!",
+          description: "You can now log in to your account.",
+        });
+        navigate("/login");
+      }, 500);
     } catch (error: any) {
       toast({
         variant: "destructive",
