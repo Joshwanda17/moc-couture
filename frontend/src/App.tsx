@@ -24,6 +24,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CartProvider>
+        <div className="grain-overlay"></div>
         <Toaster />
         <Sonner />
         <BrowserRouter>

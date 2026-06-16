@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoC Couture | The Ethereal Vest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'ebGaramond';
+            src: url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap');
+        }
+        @font-face {
+            font-family: 'dmSans';
+            src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+        }
+
+        body {
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+        }
+
+        .custom-shadow {
+            box-shadow: 0 20px 30px rgba(45, 45, 45, 0.05);
+        }
+
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#625e54",
+                      "on-primary-fixed": "#3b0900",
+                      "surface-variant": "#e4e2e1",
+                      "surface-container-highest": "#e4e2e1",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#f3f0f0",
+                      "tertiary": "#5d5c58",
+                      "tertiary-fixed-dim": "#c8c6c2",
+                      "outline": "#89726c",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#7e2b12",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#474743",
+                      "surface-bright": "#fcf9f8",
+                      "primary-fixed-dim": "#ffb5a0",
+                      "primary-fixed": "#ffdbd1",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c1c",
+                      "primary-container": "#ba573b",
+                      "tertiary-fixed": "#e5e2dd",
+                      "surface-container": "#f0eded",
+                      "on-primary-container": "#fffbff",
+                      "secondary-container": "#e6dfd2",
+                      "on-surface-variant": "#56423d",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#767471",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-dim": "#dcd9d9",
+                      "secondary-fixed": "#e9e2d5",
+                      "on-tertiary-fixed": "#1c1c19",
+                      "background": "#fcf9f8",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#676258",
+                      "primary": "#9a4025",
+                      "outline-variant": "#dcc0b9",
+                      "inverse-surface": "#303030",
+                      "surface-container-high": "#eae7e7",
+                      "surface-tint": "#9d4227",
+                      "on-surface": "#1b1c1c",
+                      "secondary-fixed-dim": "#ccc6b9",
+                      "inverse-primary": "#ffb5a0",
+                      "surface": "#fcf9f8",
+                      "on-secondary-fixed": "#1e1b13",
+                      "on-secondary-fixed-variant": "#4a463d",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-container": "#fcffe3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "unit": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-md": ["ebGaramond"],
+                      "headline-lg": ["ebGaramond"],
+                      "body-lg": ["dmSans"],
+                      "body-md": ["dmSans"],
+                      "label-md": ["dmSans"],
+                      "display-lg-mobile": ["ebGaramond"],
+                      "display-lg": ["ebGaramond"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<div class="grain-overlay"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<button aria-label="Menu" class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-primary uppercase tracking-widest">MoC Couture</h1>
+<div class="flex items-center gap-4">
+<button class="hidden md:block hover:opacity-70 transition-opacity text-on-surface-variant font-label-md text-label-md">Collections</button>
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-20 md:pt-32">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<!-- Breadcrumbs -->
+<nav class="mb-8 flex items-center gap-2 text-on-surface-variant/60 font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Archive</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Garments</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">The Ethereal Vest</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-16">
+<!-- Image Gallery (Editorial Grid) -->
+<div class="lg:col-span-7 space-y-gutter">
+<div class="aspect-[4/5] overflow-hidden bg-secondary-container">
+<img alt="The Ethereal Vest detail" class="w-full h-full object-cover" data-alt="A high-fashion editorial close-up of a handcrafted crochet vest featuring intricate lace patterns and organic textures. The garment is draped elegantly in a studio setting with soft, directional light casting gentle shadows across the cream-colored yarn. The overall aesthetic is minimalist and luxury, emphasizing the artisanal 'slow fashion' philosophy with a soft, slightly grainy film texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_ZEBopkf7VKAFHEv2AmEPwrWNJDo1g48gdffR8-HcwuUgQdU2vhGuEVoKFHRBkU3eA31bYiAlSKKrLNdo7W3xChyEkkTovs0XvCq0zBpwdDmfkYncx-UArfhiybJ1_c0wjsCPwAliMhlGSeyDTpaA7Nrz9ly11oytQiPXmQhpBCMOEWKzKh3hnFHY92d4q0_kpvUHcUXkF7uvwJ0aQY9ut5G0wC0F5fAuRfs6JVOl12445F7-hFBXxxM9pdl1CE-i0npEezFk5Vo"/>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="aspect-square overflow-hidden bg-secondary-container">
+<img alt="Crochet detail" class="w-full h-full object-cover" data-alt="Macro photography focusing on the delicate stitch work of a crochet piece, showing the intertwined threads of organic cotton and silk. The lighting is bright and warm, highlighting the tactile quality and structural integrity of the weave. The color palette is neutral, dominated by sand and cream tones, evoking a sense of calm and artisanal quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp3UvHsah66ZW2GNV39t4m_w5VkTEwYAvo2AQoeeVtjBxWPXonjmRN3HdcuEToxJQtxLFi_IzMAhwZhm3iIwvNhthjF7rA7jCKcjn59mr2rcHJ0u4LIdaiqCrVsde3MyMKoDbtDymSWjiTeVAh8hTTKbbtrZi9CIGf4Jz_a6e2bjHUXtIPAehZes-Z2IBo5TQSFKHO5qiB4TF2EYV_Gm702xXOvrcbmlTuXR_At4Qg8OJYMUhovfI0xaxVBDmQbK-grmZmEmSdRcU"/>
+</div>
+<div class="aspect-square overflow-hidden bg-secondary-container">
+<img alt="Vest back view" class="w-full h-full object-cover" data-alt="A portrait-style shot of the crochet garment's back detailing, showcasing an asymmetric hemline and complex geometric motifs. The background is a clean, minimalist off-white wall that lets the garment's silhouette stand out. The mood is serene and editorial, fitting for a high-end luxury atelier brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARL6IzSl9vfLLZ8I4vI5EBRxW69ka42e7NBBU6k5OKTlH_oRzIQ_b1l-bC-EW0r1CKAHPHczJVO9k54cDsnuMbcWY5LpFvy11OP6qpf3mHwec1eql-hhsrzwC7RuEJ0h9E6B5ZlUpfmJvITiTUAnvtta44PdMlIO2_jlCh0kWWO9oYJT0FDDujAyCyuueMM1uPuaLTfjFKZ3SrFgks2XSCxM5dppn6N5HcEgLGm17VY36HgspJk_BEQ9lHZguWUQv6JZMRxHVhD9M"/>
+</div>
+</div>
+<div class="aspect-[16/9] overflow-hidden bg-secondary-container">
+<img alt="Lifestyle view" class="w-full h-full object-cover" data-alt="A lifestyle wide shot of a model wearing the crochet vest in a Mediterranean-style courtyard with terracotta tiles and dappled sunlight. The scene feels warm and personal, capturing the rhythmic movement of the fabric. The visual style is refined yet tactile, with a sophisticated balance of light and shadow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9aCC-xp78D1zeTaw_wXaiLxyAYKbH8b1VobpeV3eoDejQUAbLYapBzbhwMEAn8yllGyDXWA9Q-krODVD7MbjHAudYX2Y30fpPpowgG3I-4jgKpUvk_XoKWpB21cHJcKhqTQUd4oVScN1ygvRyiHPAjbFquv3JTnXKWuPeIqGOFIqWX5TRPDOB5kpY8ilx0E5U1eo4q81t-yW9zeojP8tMcgHMpHy5JGyT-DGBu_dgzaCodzdgb8Tsim9or4GNzL9b0_y0DIITUBM"/>
+</div>
+</div>
+<!-- Product Information -->
+<div class="lg:col-span-5 lg:sticky lg:top-32 self-start space-y-10">
+<section>
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase mb-4 block">Archive Collection</span>
+<h2 class="font-headline-lg text-headline-lg md:text-headline-lg text-on-surface mb-2">The Ethereal Vest</h2>
+<p class="font-headline-md text-headline-md text-primary">$840.00</p>
+</section>
+<div class="border-t border-outline-variant/30 pt-8">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-4">Philosophy</h3>
+<p class="font-body-lg text-body-lg text-secondary leading-relaxed">
+                            Hand-crocheted over a period of 42 hours, the Ethereal Vest is a testament to the meditative rhythm of slow craft. Each stitch is intentionally placed to create a structural lace that breathes with the body.
+                        </p>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-3">Composition</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">70% Organic Cotton</span>
+<span class="px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">30% Raw Mulberry Silk</span>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-3">Size</h3>
+<div class="flex gap-4">
+<button class="w-12 h-12 flex items-center justify-center border border-outline text-on-surface hover:bg-primary hover:text-white transition-all">I</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline text-on-surface hover:bg-primary hover:text-white transition-all">II</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline text-on-surface hover:bg-primary hover:text-white transition-all">III</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 pt-4">
+<button class="w-full bg-primary text-white py-5 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-opacity active:scale-[0.98] duration-200">
+                            Add to Bag
+                        </button>
+<button class="w-full border border-primary text-primary py-5 font-label-md text-label-md uppercase tracking-widest hover:bg-primary/5 transition-all active:scale-[0.98] duration-200">
+                            Inquire for Bespoke
+                        </button>
+</div>
+<div class="space-y-4 pt-6 text-on-surface-variant">
+<details class="group border-b border-outline-variant/30 pb-4">
+<summary class="flex justify-between items-center cursor-pointer list-none font-label-md text-label-md uppercase">
+                                Shipping &amp; Returns
+                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-body-md leading-relaxed">Each piece is made to order to minimize waste. Please allow 3-4 weeks for artisanal production and dispatch.</p>
+</details>
+<details class="group border-b border-outline-variant/30 pb-4">
+<summary class="flex justify-between items-center cursor-pointer list-none font-label-md text-label-md uppercase">
+                                Care Guide
+                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-body-md leading-relaxed">Hand wash in cool water with pH-neutral detergent. Dry flat in shade. Do not hang.</p>
+</details>
+</div>
+</div>
+</div>
+<!-- Related Products -->
+<section class="mt-32 border-t border-outline-variant/30 pt-16">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-headline-lg text-headline-lg">Complementary Pieces</h2>
+<a class="font-label-md text-label-md text-primary underline" href="#">View Archive</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Related Item 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden mb-6 bg-surface-container">
+<img alt="The Solstice Shawl" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist photograph of a lightweight crochet shawl in a deep terracotta tone, draped over a wooden chair. The sunlight creates a beautiful shadow pattern of the lace on the wall. The style is editorial and luxurious, emphasizing high-quality natural fibers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6lDxeJclPiP9jiV9yqeoXhgDzogD_tllRnC1Ji8cyd6fAHHS5yzqgCmke0cOLaBi79PUNfrmg05lT49-G_mKGLk3EN46-uUp6krQBIzeXor-wiG2jp66b32W5LUvH4O9Xp97nIBb0EuYPX4wlECJj6HRmedcSEzW9JsO2wsgk_ZgNblYZkkS3Z-YTrrUBWXcTG5IzkFTbxyCU581IPgSOeccAHterE4ZkJj17_ITj3YwHDp8e3pfH5rPieCjRjTLFXRdio51r_6g"/>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">The Solstice Shawl</h3>
+<p class="font-body-md text-secondary">$320.00</p>
+</div>
+<!-- Related Item 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden mb-6 bg-surface-container">
+<img alt="Atelier Tote" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An artisanal crochet tote bag with a complex geometric weave pattern, photographed in a bright, modern setting with soft cream backgrounds. The handle is made of rolled silk, showing a high level of detail and luxury. Minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3a92JJCDuWw-mjFVK3l18SIwSnvlyTdzvxfwhz4-Vnv3cjX6eelGO543D6HWWed-06A6ydDC2hR4BTTHtAyWfCLwRSiY7aGyL83F1UywwdGLdAP99gwzFmJl11JCDRnl2sphga8Y0MyqZx29q7gEfC4W6eUE8P-r1Rrg3ZrgTUdPG7wl7nGaRi6ElsLPXd6DUIVWwbTjM_j5DTnYyZ1qz8L4n4I7pwfqCv96PFJ4B54fRsuCrkCb6SlGDLeRcWi-_6cqo864R4Xc"/>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">Atelier Tote</h3>
+<p class="font-body-md text-secondary">$190.00</p>
+</div>
+<!-- Related Item 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden mb-6 bg-surface-container">
+<img alt="Silk Gossamer Gloves" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up shot of a pair of hand-crocheted gloves in a delicate silk blend. The lighting is soft and airy, emphasizing the fine texture of the work. The color is a gentle off-white, presented in a high-end fashion context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlL-XqL3jkJeps8iLhkXS95GYan5F3yTK0wLt0Kmx7o2AEqsCUUphkOQtwleN_tn-Qo_g0iKSSJBlO6zBYVexJ-ZVFgePhLKR_zZb6sXdSRCPMV08ED7LaAU1jSYW4JnQUiCexfvMex1vdh2177ymdVLMpbtgW95psyfsk8WTdAVi-b_97WE5UVTWtMhZxi-PBzqHaWJ7c2_0qcD_gHjaXT7oNS-SH7rJeUvTsCN4SFKjvQnHHDm08gHAnjQC9qdDS0Na_nFQs1J8"/>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">Silk Gossamer Gloves</h3>
+<p class="font-body-md text-secondary">$145.00</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-margin-mobile py-16 text-center">
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-widest">MoC Couture</h2>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Pinterest</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-4">
+            © 2024 MoC Couture. Handcrafted with intention.
+        </p>
+</footer>
+<!-- Mobile Bottom Nav -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/95 backdrop-blur-md border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+<button class="flex flex-col items-center justify-center text-primary">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span class="font-label-md text-label-md">Collections</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-label-md text-label-md">Bag</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interaction for the "Add to Bag" button
+        const addToBagBtn = document.querySelector('button.bg-primary');
+        if (addToBagBtn) {
+            addToBagBtn.addEventListener('click', () => {
+                const originalText = addToBagBtn.innerText;
+                addToBagBtn.innerText = 'Added to Bag';
+                addToBagBtn.classList.remove('bg-primary');
+                addToBagBtn.classList.add('bg-secondary');
+                
+                setTimeout(() => {
+                    addToBagBtn.innerText = originalText;
+                    addToBagBtn.classList.remove('bg-secondary');
+                    addToBagBtn.classList.add('bg-primary');
+                }, 2000);
+            });
+        }
+    </script>
+</body></html>

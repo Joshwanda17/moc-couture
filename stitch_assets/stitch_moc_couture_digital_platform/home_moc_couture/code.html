@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoC Couture | Handcrafted Crochet Fashion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'ebGaramond';
+            src: url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+        }
+        @font-face {
+            font-family: 'dmSans';
+            src: url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+        }
+        
+        body {
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .soft-shadow {
+            box-shadow: 0 20px 30px rgba(45, 45, 45, 0.05);
+        }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        
+        .stagger-card:nth-child(even) {
+            transform: translateY(40px);
+        }
+
+        @media (max-width: 768px) {
+            .stagger-card:nth-child(even) {
+                transform: translateY(0);
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#625e54",
+                        "on-primary-fixed": "#3b0900",
+                        "surface-variant": "#e4e2e1",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f3f0f0",
+                        "tertiary": "#5d5c58",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "outline": "#89726c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#7e2b12",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed-dim": "#ffb5a0",
+                        "primary-fixed": "#ffdbd1",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "primary-container": "#ba573b",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-container": "#f0eded",
+                        "on-primary-container": "#fffbff",
+                        "secondary-container": "#e6dfd2",
+                        "on-surface-variant": "#56423d",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#1c1c19",
+                        "background": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#676258",
+                        "primary": "#9a4025",
+                        "outline-variant": "#dcc0b9",
+                        "inverse-surface": "#303030",
+                        "surface-container-high": "#eae7e7",
+                        "surface-tint": "#9d4227",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed-dim": "#ccc6b9",
+                        "inverse-primary": "#ffb5a0",
+                        "surface": "#fcf9f8",
+                        "on-secondary-fixed": "#1e1b13",
+                        "on-secondary-fixed-variant": "#4a463d",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#fcffe3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["ebGaramond"],
+                        "headline-lg": ["ebGaramond"],
+                        "body-lg": ["dmSans"],
+                        "body-md": ["dmSans"],
+                        "label-md": ["dmSans"],
+                        "display-lg-mobile": ["ebGaramond"],
+                        "display-lg": ["ebGaramond"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<div class="grain-overlay"></div>
+<!-- Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-5 md:px-16 h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-70 transition-opacity scale-95 duration-200">menu</button>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase tracking-widest">MoC Couture</h1>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-70 transition-opacity scale-95 duration-200">shopping_bag</button>
+</div>
+</header>
+<main class="pt-16 pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="relative h-[795px] flex flex-col md:flex-row items-center overflow-hidden mb-24 md:mb-32">
+<div class="w-full md:w-1/2 h-full order-2 md:order-1">
+<div class="w-full h-full relative">
+<img class="w-full h-full object-cover" data-alt="A close-up, editorial fashion photograph of a handcrafted cream-colored crochet dress with intricate floral patterns. The model is bathed in soft, warm afternoon sunlight, creating gentle shadows that emphasize the tactile yarn textures. The background is a minimalist studio with sand-toned walls, maintaining a high-fashion, artisanal aesthetic consistent with a luxury couture brand's visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsdd3Azu2qmR0HapO4E-B3v1lAyK1kNqB0RVF-0dKgMuhb92Vb1-YHV8cw0S3lSsd4M5_nfgdSKmvbkA_OdiGy8W3Nck8r8OHqlzmNBbfApB1Nnt5Hosbi5U-ydvrUrNnG87SwM5u7c1dDMf7T8AkdYkC2o_8Vmq95XxPuZ-xTuksqV-0HTA4bTSwZM8f2y3M2u84fUHlKu9s3t_d6Xp8-c8jLTsX9_yqiw-74PbC4T22JpYQpF_Gaf4g5cMumqxlp71-TL1x4DkM"/>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center px-10 md:px-16 py-12 order-1 md:order-2">
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] text-primary mb-6">Atelier Collection 2024</span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8 leading-tight">Handcrafted <br/>Crochet Fashion</h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-md mb-10">
+                    A dialogue between traditional craftsmanship and contemporary silhouettes. Each piece is meticulously hand-knotted by artisans in our studio.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md rounded-DEFAULT hover:opacity-90 transition-all uppercase tracking-widest">
+                        Shop Collection
+                    </button>
+</div>
+</div>
+</section>
+<!-- Featured Collections (Bento Style) -->
+<section class="max-w-container-max mx-auto px-5 md:px-16 mb-24 md:mb-40">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h3 class="font-headline-lg text-headline-lg mb-2">Featured Series</h3>
+<p class="font-body-md text-body-md text-secondary">Exploration of form and fiber.</p>
+</div>
+<a class="font-label-md text-label-md text-primary underline underline-offset-8 hover:opacity-70 transition-all" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Large Feature -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="relative overflow-hidden bg-secondary-container h-[500px]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A wide editorial shot of a high-fashion model wearing an avant-garde crochet jacket made of chunky terracotta wool. The setting is a minimalist architectural space with concrete textures and soft natural light. The photograph captures the luxury artisanal mood, focusing on the rhythmic patterns of the knit and the sophisticated silhouette against a neutral cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBveC2Q4Cez2jVAdnCBtSoFMEnRLH9MD7xpXJG-pAeHRiEj7-YbLdPhrkgcc3Ak2DiFRaEbUCHrmN1enOGUqZ_FHUKWQP5B5QB15VwxX6IJ3sC7GeLHRxKswDw-f5SnwwDq-Ph-yods7iaLcTGnKvNlQOd86u9EN46_Fiwl-qev3XGUluvvWPnmRntZPfYOOheYfSe3GCLZZaBmEA4vbh-fR8k229zFHi2BKyDQyfDwDOlcnxCH38QtGztPxgLf0SsbfayN520yBRY"/>
+<div class="absolute inset-0 bg-black/5"></div>
+<div class="absolute bottom-8 left-8 text-white">
+<span class="font-label-md text-label-md uppercase tracking-widest block mb-2">Signature</span>
+<h4 class="font-headline-md text-headline-md">The Terracotta Series</h4>
+</div>
+</div>
+</div>
+<!-- Small Feature 1 -->
+<div class="md:col-span-4 flex flex-col gap-8">
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-secondary-container h-[234px]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A studio photograph showcasing a delicate, ivory-toned crochet shawl draped over a minimalist wooden chair. The lighting is diffused and atmospheric, highlighting the intricate lace-work and organic cotton texture. The overall aesthetic is calm, high-end, and focuses on the tactile luxury of the material within a cream and sand-colored palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyUXzzNOcyzxam0h_N71qrnfKb9yPuGTGq_ffmdpCDgU8gTTSpxrvIfNkUsesDLSdtFyuErije1E_i8nCehT-2-sxuWOdzXPoP-nnBP1F91xRcHrmLw6DZSLWg2bwzYWTwtX4Gd07sSNrVH05m4H76RxrXJLgBQCmVAqfn5ZGCee2-qRi54DU86_xiLQXPpysxf_bE9yaY3xZKmubAuUXa2F49GlJtEXUDztwSK6Xul2VYR4TBWs0D1rQ7yyHzyyuCEL2cbQ672yo"/>
+<div class="absolute inset-0 bg-black/5"></div>
+</div>
+<div class="mt-4">
+<h4 class="font-headline-md text-headline-md text-primary">Ephemeral Lace</h4>
+<p class="font-body-md text-body-md text-secondary">Sheer textures for layered elegance.</p>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-secondary-container h-[234px]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A lifestyle fashion shot of a woman in a sand-colored crochet maxi dress walking through a sun-drenched coastal landscape. The image uses high-key lighting to emphasize the airy nature of the crochet fabric. The color palette is composed of warm earth tones, soft creams, and the muted green of beach grass, perfectly aligning with the minimalist and tactile brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmj_3MwEHbgGZ2ueMih9n3I6DDMmHbPZZYdoyOev2xXTj7-JTQ55fBkhayuXJwm6z1ywDsk6aUUFfJ3iTO78bKfqEO8UmaAVPjeLim6Q8677s9IHHNySL6Vtk1nbkTZB4k2G7Lu_Bw5IHnHUdN_BbGrup54A23lWDrcERa8dIoVk90ZLUXC7EWcSGl32QFKBiycvQ_jkeToX-EWCZII1CrAl6BoHw9ibEp8BZAWyafryM_TeS7YrSOwsrFgPOdjn4IQB0Z1w06VF4"/>
+<div class="absolute inset-0 bg-black/5"></div>
+</div>
+<div class="mt-4">
+<h4 class="font-headline-md text-headline-md text-primary">Coastal Knits</h4>
+<p class="font-body-md text-body-md text-secondary">Natural fibers, ocean rhythms.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About MoC Couture (Editorial Spread) -->
+<section class="bg-surface-container-low py-24 md:py-40">
+<div class="max-w-container-max mx-auto px-5 md:px-16 grid grid-cols-1 md:grid-cols-2 items-center gap-16 md:gap-32">
+<div class="relative flex justify-center">
+<div class="w-full max-w-sm aspect-[3/4] relative z-10 soft-shadow">
+<img class="w-full h-full object-cover" data-alt="A black and white, high-contrast photograph of an artisan's hands working with a crochet hook and natural linen yarn. The focus is sharp on the tension of the thread and the rhythm of the work, evoking a sense of 'slow fashion' and deliberate craftsmanship. The background is blurred, keeping all attention on the artisanal process and the high-quality textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB76D29kblTInBe1hVLIESwj1bOrwyeUC7xfSe8gIaUxDWuXGzmRkzAr6t4hfSQBeggRRUgHMd_4mqem7qtlJllG0jVvB0cXRH1nVX2lEcIRepuCOU31qp3JE3O6aDOcEl2L_nyy-Eq4X-NyLg-_-hSiXEuzN10fDbN5YVydpT-sFAKMTw4wL4hwv4_xIaSdaVeAv1cxjAPSSM-JcoiiTlrDijQ7KFH__7f_J1zCkpuCC9nBPHAFuySUobyA87vsjXXP6nNuNXQ3qQ"/>
+</div>
+<div class="absolute -bottom-8 -right-8 w-64 h-64 bg-secondary-container -z-0 hidden md:block opacity-50"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-[0.3em] mb-6">Our Narrative</h3>
+<h2 class="font-display-lg-mobile md:font-headline-lg text-display-lg-mobile md:text-headline-lg mb-8 italic">The Rhythm of the Hook</h2>
+<p class="font-body-lg text-body-lg text-tertiary mb-6 leading-relaxed">
+                        At MoC Couture, we believe that fashion should be as meaningful as it is beautiful. Our atelier was founded on the principle of intentionality—each stitch is a decision, each garment a story of time.
+                    </p>
+<p class="font-body-md text-body-md text-secondary mb-10 italic border-l-2 border-primary pl-6">
+                        "We don't just make clothing; we weave heritage into modern silhouettes, creating artifacts of personal expression that last lifetimes."
+                    </p>
+<button class="border border-primary text-primary px-8 py-3 font-label-md text-label-md rounded-DEFAULT hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest">
+                        Read Our Story
+                    </button>
+</div>
+</div>
+</section>
+<!-- Process Highlight -->
+<section class="max-w-container-max mx-auto px-5 md:px-16 py-24 md:py-40 text-center">
+<h3 class="font-headline-lg text-headline-lg mb-16">Artisanal Integrity</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">spa</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest mb-4">Pure Origin</h4>
+<p class="font-body-md text-body-md text-secondary">Sourcing only 100% organic cotton, silk, and heritage wool from ethical producers.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">pan_tool</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest mb-4">Zero Machine</h4>
+<p class="font-body-md text-body-md text-secondary">Every single piece in our collection is produced entirely by hand in our local atelier.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">all_inclusive</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest mb-4">Heirloom Quality</h4>
+<p class="font-body-md text-body-md text-secondary">Designed to transcend trends and be passed down through generations.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-5 md:px-16 py-16 text-center">
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-[0.2em]">MoC Couture</h2>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Pinterest</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs md:max-w-none">
+            © 2024 MoC Couture. Handcrafted with intention.
+        </p>
+</footer>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/95 backdrop-blur-md border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center justify-center text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary-container" href="#">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span class="font-label-md text-label-md">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary-container" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-label-md text-label-md">Bag</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary-container" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for hero reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroText = document.querySelector('h2');
+            if (heroText) {
+                heroText.style.opacity = '0';
+                heroText.style.transform = 'translateY(20px)';
+                heroText.style.transition = 'all 1s ease-out';
+                
+                setTimeout(() => {
+                    heroText.style.opacity = '1';
+                    heroText.style.transform = 'translateY(0)';
+                }, 300);
+            }
+        });
+    </script>
+</body></html>

@@ -1,6 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, LogOut, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -20,134 +18,131 @@ const Navbar = ({ cartItemCount = 0 }: NavbarProps) => {
 
   useEffect(() => {
     checkAuth();
-    // Simple mock event listener for state changes
     window.addEventListener("auth-change", checkAuth);
     return () => window.removeEventListener("auth-change", checkAuth);
   }, []);
 
   const checkAuth = () => {
-    const mockUser = localStorage.getItem("mock_user");
-    if (mockUser) {
-      setIsLoggedIn(true);
-      const user = JSON.parse(mockUser);
-      setIsAdmin(user.role === "admin");
-    } else {
-      setIsLoggedIn(false);
-      setIsAdmin(false);
+    const authDataStr = localStorage.getItem("moc_auth");
+    if (authDataStr) {
+      try {
+        const authData = JSON.parse(authDataStr);
+        if (authData.token && authData.user) {
+          setIsLoggedIn(true);
+          setIsAdmin(authData.user.role === "admin");
+          return;
+        }
+      } catch (e) {
+        // invalid JSON
+      }
     }
+    setIsLoggedIn(false);
+    setIsAdmin(false);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("mock_user");
+    localStorage.removeItem("moc_auth");
     window.dispatchEvent(new Event("auth-change"));
     navigate("/");
     setIsMobileMenuOpen(false);
   };
 
-  const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
-    const baseClasses = "font-medium text-left w-full justify-start";
-    const DesktopLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-      <Link to={to} onClick={() => mobile && setIsMobileMenuOpen(false)}>
-        <Button variant="ghost" className={mobile ? baseClasses : "font-medium"}>
-          {children}
-        </Button>
-      </Link>
-    );
-
-    return (
-      <>
-        <DesktopLink to="/">Home</DesktopLink>
-        <DesktopLink to="/collections">Collections</DesktopLink>
-        <DesktopLink to="/gallery">Shop</DesktopLink>
-        <DesktopLink to="/lookbook">Lookbook</DesktopLink>
-        <DesktopLink to="/about">About</DesktopLink>
-        <DesktopLink to="/contact">Contact</DesktopLink>
-        {isAdmin && <DesktopLink to="/admin">Admin</DesktopLink>}
-      </>
-    );
-  };
+  const MenuLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <Link 
+      to={to} 
+      onClick={() => setIsMobileMenuOpen(false)}
+      className="text-2xl font-display text-primary hover:text-primary/70 transition-colors block py-2"
+    >
+      {children}
+    </Link>
+  );
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
-            <h1 className="text-2xl font-bold font-display text-gradient">
-              MoC Couture
-            </h1>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-4">
-            <NavLinks />
-            <div className="flex items-center ml-4 space-x-2">
-              {!isLoggedIn ? (
-                <Link to="/login">
-                  <Button variant="ghost" size="icon">
-                    <User className="h-5 w-5" />
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="ghost" size="icon" onClick={handleLogout}>
-                  <LogOut className="h-5 w-5" />
-                </Button>
-              )}
-              <Link to="/cart">
-                <Button variant="ghost" size="icon" className="relative">
-                  <ShoppingCart className="h-5 w-5" />
-                  {cartItemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-secondary text-secondary-foreground text-xs flex items-center justify-center font-semibold">
-                      {cartItemCount}
-                    </span>
-                  )}
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Mobile Navigation Controls */}
-          <div className="flex md:hidden items-center space-x-2">
-            <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative mr-2">
-                <ShoppingCart className="h-5 w-5" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-secondary text-secondary-foreground text-xs flex items-center justify-center font-semibold">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Button>
-            </Link>
-            
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] flex flex-col pt-12">
-                <div className="flex flex-col space-y-4">
-                  <NavLinks mobile />
-                  
-                  <div className="pt-6 mt-6 border-t flex flex-col gap-4">
-                    {!isLoggedIn ? (
-                      <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="outline" className="w-full justify-start">
-                          <User className="mr-2 h-5 w-5" /> Sign In
-                        </Button>
+    <>
+      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-5 md:px-16 h-16 border-b border-outline-variant/20">
+        <div className="flex items-center gap-4">
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <button className="material-symbols-outlined text-primary hover:opacity-70 transition-opacity scale-95 duration-200">
+                menu
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] flex flex-col pt-16 bg-surface border-r border-outline-variant/30">
+              <div className="flex flex-col space-y-4">
+                <MenuLink to="/">Home</MenuLink>
+                <MenuLink to="/collections">Collections</MenuLink>
+                <MenuLink to="/gallery">Shop</MenuLink>
+                <MenuLink to="/lookbook">Lookbook</MenuLink>
+                <MenuLink to="/about">About</MenuLink>
+                <MenuLink to="/contact">Contact</MenuLink>
+                {isAdmin && <MenuLink to="/admin">Admin</MenuLink>}
+                
+                <div className="pt-8 mt-8 border-t border-outline-variant/30 flex flex-col gap-4">
+                  {!isLoggedIn ? (
+                    <>
+                      <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="text-secondary hover:text-primary transition-colors font-body text-lg">
+                        Sign In
                       </Link>
-                    ) : (
-                      <Button variant="outline" className="w-full justify-start text-destructive" onClick={handleLogout}>
-                        <LogOut className="mr-2 h-5 w-5" /> Logout
-                      </Button>
-                    )}
-                  </div>
+                      <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)} className="text-secondary hover:text-primary transition-colors font-body text-lg">
+                        Sign Up
+                      </Link>
+                    </>
+                  ) : (
+                    <button onClick={handleLogout} className="text-left text-error hover:opacity-70 transition-colors font-body text-lg">
+                      Logout
+                    </button>
+                  )}
                 </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-      </div>
-    </nav>
+
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+          <h1 className="font-display text-[28px] md:text-[32px] text-primary uppercase tracking-widest whitespace-nowrap">
+            MoC Couture
+          </h1>
+        </Link>
+
+        <div className="flex items-center gap-4">
+          <Link to="/cart" className="relative group">
+            <button className="material-symbols-outlined text-primary group-hover:opacity-70 transition-opacity scale-95 duration-200">
+              shopping_bag
+            </button>
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-on-primary text-[10px] flex items-center justify-center font-bold">
+                {cartItemCount}
+              </span>
+            )}
+          </Link>
+        </div>
+      </header>
+
+      {/* Mobile Bottom Navigation - visible only on sm screens and below */}
+      <nav className="md:hidden fixed bottom-0 w-full z-50 bg-background/95 backdrop-blur-md border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+        <Link to="/gallery" className="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary">
+          <span className="material-symbols-outlined text-[20px]">storefront</span>
+          <span className="font-body text-[10px] uppercase tracking-wider mt-1">Shop</span>
+        </Link>
+        <Link to="/collections" className="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary">
+          <span className="material-symbols-outlined text-[20px]">auto_awesome_motion</span>
+          <span className="font-body text-[10px] uppercase tracking-wider mt-1">Collections</span>
+        </Link>
+        <Link to="/cart" className="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary relative">
+          <span className="material-symbols-outlined text-[20px]">shopping_basket</span>
+          <span className="font-body text-[10px] uppercase tracking-wider mt-1">Bag</span>
+          {cartItemCount > 0 && (
+            <span className="absolute -top-1 right-2 h-3.5 w-3.5 rounded-full bg-primary text-on-primary text-[8px] flex items-center justify-center font-bold">
+              {cartItemCount}
+            </span>
+          )}
+        </Link>
+        <Link to={isLoggedIn ? (isAdmin ? "/admin" : "/") : "/login"} className="flex flex-col items-center justify-center text-secondary transition-all duration-300 hover:text-primary">
+          <span className="material-symbols-outlined text-[20px]">person</span>
+          <span className="font-body text-[10px] uppercase tracking-wider mt-1">{isLoggedIn ? 'Profile' : 'Sign In'}</span>
+        </Link>
+      </nav>
+    </>
   );
 };
 

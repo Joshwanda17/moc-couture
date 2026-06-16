@@ -18,8 +18,18 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Mock login: Accept any login and set as admin
-      localStorage.setItem("mock_user", JSON.stringify({ email, role: "admin" }));
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      localStorage.setItem("moc_auth", JSON.stringify(data));
       window.dispatchEvent(new Event("auth-change"));
 
       toast({
@@ -27,7 +37,11 @@ const Login = () => {
         description: "You've successfully logged in.",
       });
 
-      navigate("/admin");
+      if (data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error: any) {
       toast({
         variant: "destructive",
