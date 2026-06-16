@@ -1,7 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, LogOut } from "lucide-react";
+import { ShoppingCart, User, LogOut, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface NavbarProps {
   cartItemCount?: number;
@@ -10,6 +15,7 @@ interface NavbarProps {
 const Navbar = ({ cartItemCount = 0 }: NavbarProps) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +41,30 @@ const Navbar = ({ cartItemCount = 0 }: NavbarProps) => {
     localStorage.removeItem("mock_user");
     window.dispatchEvent(new Event("auth-change"));
     navigate("/");
+    setIsMobileMenuOpen(false);
+  };
+
+  const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
+    const baseClasses = "font-medium text-left w-full justify-start";
+    const DesktopLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
+      <Link to={to} onClick={() => mobile && setIsMobileMenuOpen(false)}>
+        <Button variant="ghost" className={mobile ? baseClasses : "font-medium"}>
+          {children}
+        </Button>
+      </Link>
+    );
+
+    return (
+      <>
+        <DesktopLink to="/">Home</DesktopLink>
+        <DesktopLink to="/collections">Collections</DesktopLink>
+        <DesktopLink to="/gallery">Shop</DesktopLink>
+        <DesktopLink to="/lookbook">Lookbook</DesktopLink>
+        <DesktopLink to="/about">About</DesktopLink>
+        <DesktopLink to="/contact">Contact</DesktopLink>
+        {isAdmin && <DesktopLink to="/admin">Admin</DesktopLink>}
+      </>
+    );
   };
 
   return (
@@ -47,57 +77,38 @@ const Navbar = ({ cartItemCount = 0 }: NavbarProps) => {
             </h1>
           </Link>
           
-          <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 overflow-x-auto pb-2 sm:pb-0">
-            <Link to="/">
-              <Button variant="ghost" className="font-medium">
-                Home
-              </Button>
-            </Link>
-            <Link to="/collections">
-              <Button variant="ghost" className="font-medium">
-                Collections
-              </Button>
-            </Link>
-            <Link to="/gallery">
-              <Button variant="ghost" className="font-medium">
-                Shop
-              </Button>
-            </Link>
-            <Link to="/lookbook">
-              <Button variant="ghost" className="font-medium">
-                Lookbook
-              </Button>
-            </Link>
-            <Link to="/about">
-              <Button variant="ghost" className="font-medium">
-                About
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="ghost" className="font-medium">
-                Contact
-              </Button>
-            </Link>
-            {isAdmin && (
-              <Link to="/admin">
-                <Button variant="ghost" className="font-medium">
-                  Admin
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-4">
+            <NavLinks />
+            <div className="flex items-center ml-4 space-x-2">
+              {!isLoggedIn ? (
+                <Link to="/login">
+                  <Button variant="ghost" size="icon">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </Link>
+              ) : (
+                <Button variant="ghost" size="icon" onClick={handleLogout}>
+                  <LogOut className="h-5 w-5" />
+                </Button>
+              )}
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-secondary text-secondary-foreground text-xs flex items-center justify-center font-semibold">
+                      {cartItemCount}
+                    </span>
+                  )}
                 </Button>
               </Link>
-            )}
-            {!isLoggedIn ? (
-              <Link to="/login">
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
-                </Button>
-              </Link>
-            ) : (
-              <Button variant="ghost" size="icon" onClick={handleLogout}>
-                <LogOut className="h-5 w-5" />
-              </Button>
-            )}
+            </div>
+          </div>
+
+          {/* Mobile Navigation Controls */}
+          <div className="flex md:hidden items-center space-x-2">
             <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative mr-2">
                 <ShoppingCart className="h-5 w-5" />
                 {cartItemCount > 0 && (
                   <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-secondary text-secondary-foreground text-xs flex items-center justify-center font-semibold">
@@ -106,6 +117,33 @@ const Navbar = ({ cartItemCount = 0 }: NavbarProps) => {
                 )}
               </Button>
             </Link>
+            
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] flex flex-col pt-12">
+                <div className="flex flex-col space-y-4">
+                  <NavLinks mobile />
+                  
+                  <div className="pt-6 mt-6 border-t flex flex-col gap-4">
+                    {!isLoggedIn ? (
+                      <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                        <Button variant="outline" className="w-full justify-start">
+                          <User className="mr-2 h-5 w-5" /> Sign In
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button variant="outline" className="w-full justify-start text-destructive" onClick={handleLogout}>
+                        <LogOut className="mr-2 h-5 w-5" /> Logout
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
