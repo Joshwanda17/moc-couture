@@ -37,6 +37,16 @@ export const api = {
     return res.json();
   },
 
+  updateProduct: async (id: string, productData: any) => {
+    const res = await fetch(`${API_URL}/products/${id}`, {
+      method: "PUT",
+      headers: api.getHeaders(),
+      body: JSON.stringify(productData),
+    });
+    if (!res.ok) throw new Error("Failed to update product");
+    return res.json();
+  },
+
   deleteProduct: async (id: string) => {
     const res = await fetch(`${API_URL}/products/${id}`, {
       method: "DELETE",

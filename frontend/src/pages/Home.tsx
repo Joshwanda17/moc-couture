@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import { api } from "@/lib/api";
 
 const Home = () => {
+  const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await api.getProducts();
+        // Just take the first 3 products for the featured section
+        setFeaturedProducts(products.slice(0, 3));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <Navbar />
@@ -50,58 +67,64 @@ const Home = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {/* Large Feature */}
-            <div className="md:col-span-8 group cursor-pointer">
-              <Link to="/collections">
-                <div className="relative overflow-hidden bg-secondary-container h-[500px]">
-                  <img 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    alt="A wide editorial shot of a high-fashion model wearing an avant-garde crochet jacket" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBveC2Q4Cez2jVAdnCBtSoFMEnRLH9MD7xpXJG-pAeHRiEj7-YbLdPhrkgcc3Ak2DiFRaEbUCHrmN1enOGUqZ_FHUKWQP5B5QB15VwxX6IJ3sC7GeLHRxKswDw-f5SnwwDq-Ph-yods7iaLcTGnKvNlQOd86u9EN46_Fiwl-qev3XGUluvvWPnmRntZPfYOOheYfSe3GCLZZaBmEA4vbh-fR8k229zFHi2BKyDQyfDwDOlcnxCH38QtGztPxgLf0SsbfayN520yBRY"
-                  />
-                  <div className="absolute inset-0 bg-black/5"></div>
-                  <div className="absolute bottom-8 left-8 text-white">
-                    <span className="font-label-md text-label-md uppercase tracking-widest block mb-2">Signature</span>
-                    <h4 className="font-headline-md text-headline-md">The Terracotta Series</h4>
+            {featuredProducts[0] && (
+              <div className="md:col-span-8 group cursor-pointer">
+                <Link to={`/product/${featuredProducts[0].id}`}>
+                  <div className="relative overflow-hidden bg-secondary-container h-[500px]">
+                    <img 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                      alt={featuredProducts[0].name} 
+                      src={featuredProducts[0].main_image}
+                    />
+                    <div className="absolute inset-0 bg-black/5"></div>
+                    <div className="absolute bottom-8 left-8 text-white">
+                      <span className="font-label-md text-label-md uppercase tracking-widest block mb-2">Signature</span>
+                      <h4 className="font-headline-md text-headline-md">{featuredProducts[0].name}</h4>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </div>
+                </Link>
+              </div>
+            )}
             
             {/* Small Features */}
             <div className="md:col-span-4 flex flex-col gap-8">
-              <div className="group cursor-pointer">
-                <Link to="/collections">
-                  <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                    <img 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                      alt="A delicate, ivory-toned crochet shawl" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyUXzzNOcyzxam0h_N71qrnfKb9yPuGTGq_ffmdpCDgU8gTTSpxrvIfNkUsesDLSdtFyuErije1E_i8nCehT-2-sxuWOdzXPoP-nnBP1F91xRcHrmLw6DZSLWg2bwzYWTwtX4Gd07sSNrVH05m4H76RxrXJLgBQCmVAqfn5ZGCee2-qRi54DU86_xiLQXPpysxf_bE9yaY3xZKmubAuUXa2F49GlJtEXUDztwSK6Xul2VYR4TBWs0D1rQ7yyHzyyuCEL2cbQ672yo"
-                    />
-                    <div className="absolute inset-0 bg-black/5"></div>
-                  </div>
-                  <div className="mt-4">
-                    <h4 className="font-headline-md text-headline-md text-primary">Ephemeral Lace</h4>
-                    <p className="font-body-md text-body-md text-secondary">Sheer textures for layered elegance.</p>
-                  </div>
-                </Link>
-              </div>
+              {featuredProducts[1] && (
+                <div className="group cursor-pointer">
+                  <Link to={`/product/${featuredProducts[1].id}`}>
+                    <div className="relative overflow-hidden bg-secondary-container h-[234px]">
+                      <img 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        alt={featuredProducts[1].name} 
+                        src={featuredProducts[1].main_image}
+                      />
+                      <div className="absolute inset-0 bg-black/5"></div>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="font-headline-md text-headline-md text-primary">{featuredProducts[1].name}</h4>
+                      <p className="font-body-md text-body-md text-secondary">UGX {(featuredProducts[1].price * 3700).toLocaleString()}</p>
+                    </div>
+                  </Link>
+                </div>
+              )}
               
-              <div className="group cursor-pointer">
-                <Link to="/collections">
-                  <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                    <img 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                      alt="A lifestyle fashion shot of a woman in a sand-colored crochet maxi dress" 
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmj_3MwEHbgGZ2ueMih9n3I6DDMmHbPZZYdoyOev2xXTj7-JTQ55fBkhayuXJwm6z1ywDsk6aUUFfJ3iTO78bKfqEO8UmaAVPjeLim6Q8677s9IHHNySL6Vtk1nbkTZB4k2G7Lu_Bw5IHnHUdN_BbGrup54A23lWDrcERa8dIoVk90ZLUXC7EWcSGl32QFKBiycvQ_jkeToX-EWCZII1CrAl6BoHw9ibEp8BZAWyafryM_TeS7YrSOwsrFgPOdjn4IQB0Z1w06VF4"
-                    />
-                    <div className="absolute inset-0 bg-black/5"></div>
-                  </div>
-                  <div className="mt-4">
-                    <h4 className="font-headline-md text-headline-md text-primary">Coastal Knits</h4>
-                    <p className="font-body-md text-body-md text-secondary">Natural fibers, ocean rhythms.</p>
-                  </div>
-                </Link>
-              </div>
+              {featuredProducts[2] && (
+                <div className="group cursor-pointer">
+                  <Link to={`/product/${featuredProducts[2].id}`}>
+                    <div className="relative overflow-hidden bg-secondary-container h-[234px]">
+                      <img 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        alt={featuredProducts[2].name} 
+                        src={featuredProducts[2].main_image}
+                      />
+                      <div className="absolute inset-0 bg-black/5"></div>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="font-headline-md text-headline-md text-primary">{featuredProducts[2].name}</h4>
+                      <p className="font-body-md text-body-md text-secondary">UGX {(featuredProducts[2].price * 3700).toLocaleString()}</p>
+                    </div>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </section>

@@ -11,6 +11,7 @@ const Admin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAddingMode, setIsAddingMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -70,17 +71,18 @@ const Admin = () => {
 
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!productImageFile) {
+    if (!productImageFile && !editingProductId) {
       toast({ title: "Image required", description: "Please upload a product image", variant: "destructive" });
       return;
     }
 
     setIsSubmitting(true);
     try {
-      // 1. Upload the image
-      const imageUrl = await api.uploadImage(productImageFile);
+      let imageUrl = newProduct.main_image; // Keep existing image if no new file is uploaded
+      if (productImageFile) {
+        imageUrl = await api.uploadImage(productImageFile);
+      }
 
-      // 2. Create the product
       const productData = {
         name: newProduct.name,
         description: newProduct.description,
@@ -90,21 +92,43 @@ const Admin = () => {
         status: newProduct.status,
       };
 
-      await api.createProduct(productData);
+      if (editingProductId) {
+        await api.updateProduct(editingProductId, productData);
+        toast({ title: "Success", description: "Product updated successfully" });
+      } else {
+        await api.createProduct(productData);
+        toast({ title: "Success", description: "Product created successfully" });
+      }
       
-      toast({ title: "Success", description: "Product created successfully" });
-      
-      // Refresh list and reset
       await fetchData();
-      setNewProduct({ name: "", description: "", price: "", category: "Clothing", status: "Available" });
-      setProductImageFile(null);
-      setIsAddingMode(false);
+      resetForm();
     } catch (err) {
       console.error(err);
-      toast({ title: "Error", description: "Failed to create product", variant: "destructive" });
+      toast({ title: "Error", description: `Failed to ${editingProductId ? 'update' : 'create'} product`, variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleEditProduct = (product: any) => {
+    setEditingProductId(product.id);
+    setNewProduct({
+      name: product.name,
+      description: product.description,
+      price: product.price.toString(),
+      category: product.category,
+      status: product.status,
+      main_image: product.main_image
+    } as any);
+    setProductImageFile(null);
+    setIsAddingMode(true);
+  };
+
+  const resetForm = () => {
+    setNewProduct({ name: "", description: "", price: "", category: "Clothing", status: "Available" } as any);
+    setProductImageFile(null);
+    setEditingProductId(null);
+    setIsAddingMode(false);
   };
 
   const handleDeleteProduct = async (id: string) => {
@@ -157,7 +181,7 @@ const Admin = () => {
               <p className="font-body-md text-body-md text-secondary mt-2">Manage your handcrafted crochet collection and stock.</p>
             </div>
             {!isAddingMode && (
-              <button onClick={() => setIsAddingMode(true)} className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/10">
+              <button onClick={() => { resetForm(); setIsAddingMode(true); }} className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/10">
                 <span className="material-symbols-outlined">add</span>
                 Add Product
               </button>
@@ -188,8 +212,8 @@ const Admin = () => {
           {isAddingMode && (
             <div className="bg-surface-container-low p-8 mb-12 border border-outline-variant/20">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-headline-md text-headline-md">New Product</h2>
-                <button onClick={() => setIsAddingMode(false)} className="material-symbols-outlined text-secondary hover:text-primary">close</button>
+                <h2 className="font-headline-md text-headline-md">{editingProductId ? 'Edit Product' : 'New Product'}</h2>
+                <button onClick={resetForm} className="material-symbols-outlined text-secondary hover:text-primary">close</button>
               </div>
               <form onSubmit={handleAddProduct} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -216,12 +240,12 @@ const Admin = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="font-label-md text-label-md block mb-2 text-secondary uppercase">Image</label>
-                    <input type="file" accept="image/*" className="w-full font-body-md text-secondary" required onChange={handleImageUpload} />
+                    <label className="font-label-md text-label-md block mb-2 text-secondary uppercase">Image {editingProductId ? "(Optional)" : ""}</label>
+                    <input type="file" accept="image/*" className="w-full font-body-md text-secondary" required={!editingProductId} onChange={handleImageUpload} />
                   </div>
                 </div>
                 <button type="submit" disabled={isSubmitting} className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all w-full md:w-auto disabled:opacity-50">
-                  {isSubmitting ? 'Uploading...' : 'Save Product'}
+                  {isSubmitting ? 'Saving...' : 'Save Product'}
                 </button>
               </form>
             </div>
@@ -269,6 +293,7 @@ const Admin = () => {
                       </td>
                       <td className="p-6 text-right">
                         <div className="flex justify-end gap-3">
+                          <button onClick={() => handleEditProduct(product)} className="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
                           <button onClick={() => handleDeleteProduct(product.id)} className="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
                         </div>
                       </td>

@@ -167,6 +167,19 @@ app.post('/api/products', (req, res) => {
   );
 });
 
+app.put('/api/products/:id', (req, res) => {
+  const { name, description, price, category, main_image, featured, status, collection_id } = req.body;
+  const id = req.params.id;
+  db.run(
+    `UPDATE products SET name = ?, description = ?, price = ?, category = ?, main_image = ?, featured = ?, status = ?, collection_id = ? WHERE id = ?`,
+    [name, description, price, category, main_image, featured ? 1 : 0, status, collection_id, id],
+    function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.status(200).json({ id, name, description, price, category, main_image, featured, status, collection_id });
+    }
+  );
+});
+
 app.delete('/api/products/:id', (req, res) => {
   db.run('DELETE FROM products WHERE id = ?', [req.params.id], function(err) {
     if (err) return res.status(500).json({ error: err.message });
