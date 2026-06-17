@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import { getProducts, getCollections, Product, Collection } from "@/data/mockProducts";
+import { api } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
 const Admin = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [collections, setCollections] = useState<Collection[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [collections, setCollections] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAddingMode, setIsAddingMode] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   // New Product State
   const [newProduct, setNewProduct] = useState({
@@ -17,14 +20,12 @@ const Admin = () => {
     description: "",
     price: "",
     category: "Clothing",
-    status: "Available" as Product["status"],
+    status: "Available",
   });
-  const [productImage, setProductImage] = useState<string | null>(null);
+  const [productImageFile, setProductImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     checkAdminStatus();
-    setProducts(getProducts());
-    setCollections(getCollections());
   }, []);
 
   const checkAdminStatus = () => {
@@ -40,51 +41,82 @@ const Admin = () => {
         return;
       }
       setIsAdmin(true);
-      setLoading(false);
+      fetchData();
     } catch (e) {
       navigate("/login");
     }
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setProductImage(reader.result as string);
-      reader.readAsDataURL(file);
-    } else {
-      setProductImage(null);
+  const fetchData = async () => {
+    try {
+      const [prods, colls] = await Promise.all([
+        api.getProducts(),
+        api.getCollections()
+      ]);
+      setProducts(prods);
+      setCollections(colls);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Failed to load admin data", variant: "destructive" });
+      setLoading(false);
     }
   };
 
-  const handleAddProduct = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!productImage) return;
-
-    const product: Product = {
-      id: Math.random().toString(36).substr(2, 9),
-      name: newProduct.name,
-      description: newProduct.description,
-      price: parseFloat(newProduct.price),
-      category: newProduct.category,
-      main_image: productImage,
-      featured: false,
-      status: newProduct.status,
-    };
-
-    const updated = [...products, product];
-    localStorage.setItem("mock_products", JSON.stringify(updated));
-    setProducts(updated);
-    
-    setNewProduct({ name: "", description: "", price: "", category: "Clothing", status: "Available" });
-    setProductImage(null);
-    setIsAddingMode(false);
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setProductImageFile(file);
   };
 
-  const handleDeleteProduct = (id: string) => {
-    const updated = products.filter(p => p.id !== id);
-    localStorage.setItem("mock_products", JSON.stringify(updated));
-    setProducts(updated);
+  const handleAddProduct = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!productImageFile) {
+      toast({ title: "Image required", description: "Please upload a product image", variant: "destructive" });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      // 1. Upload the image
+      const imageUrl = await api.uploadImage(productImageFile);
+
+      // 2. Create the product
+      const productData = {
+        name: newProduct.name,
+        description: newProduct.description,
+        price: parseFloat(newProduct.price),
+        category: newProduct.category,
+        main_image: imageUrl,
+        status: newProduct.status,
+      };
+
+      await api.createProduct(productData);
+      
+      toast({ title: "Success", description: "Product created successfully" });
+      
+      // Refresh list and reset
+      await fetchData();
+      setNewProduct({ name: "", description: "", price: "", category: "Clothing", status: "Available" });
+      setProductImageFile(null);
+      setIsAddingMode(false);
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Failed to create product", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteProduct = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this product?")) return;
+    try {
+      await api.deleteProduct(id);
+      toast({ title: "Deleted", description: "Product removed" });
+      fetchData();
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Failed to delete product", variant: "destructive" });
+    }
   };
 
   const handleLogout = () => {
@@ -93,7 +125,7 @@ const Admin = () => {
     navigate("/");
   };
 
-  if (loading) return null;
+  if (loading) return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
   if (!isAdmin) return null;
 
   return (
@@ -185,11 +217,11 @@ const Admin = () => {
                   </div>
                   <div>
                     <label className="font-label-md text-label-md block mb-2 text-secondary uppercase">Image</label>
-                    <input type="file" accept="image/*" className="w-full font-body-md text-secondary" required={!productImage} onChange={handleImageUpload} />
+                    <input type="file" accept="image/*" className="w-full font-body-md text-secondary" required onChange={handleImageUpload} />
                   </div>
                 </div>
-                <button type="submit" className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all w-full md:w-auto">
-                  Save Product
+                <button type="submit" disabled={isSubmitting} className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all w-full md:w-auto disabled:opacity-50">
+                  {isSubmitting ? 'Uploading...' : 'Save Product'}
                 </button>
               </form>
             </div>
@@ -218,7 +250,7 @@ const Admin = () => {
                           </div>
                           <div>
                             <div className="font-body-lg text-body-lg text-on-surface font-medium">{product.name}</div>
-                            <div className="font-label-md text-label-md text-secondary mt-1">SKU: {product.id.toUpperCase()}</div>
+                            <div className="font-label-md text-label-md text-secondary mt-1">SKU: {product.id.substring(0, 8).toUpperCase()}</div>
                           </div>
                         </div>
                       </td>

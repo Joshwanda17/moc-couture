@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact — MoC Couture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --cream: #fcf9f8;
+            --sand: #f6f3f2;
+            --terracotta: #9a4025;
+        }
+
+        body {
+            background-color: var(--cream);
+            position: relative;
+        }
+
+        /* Subtle grain overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.02;
+            z-index: 9999;
+            pointer-events: none;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .input-underline {
+            border: none;
+            border-bottom: 1px solid #dcc0b9;
+            background: transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-underline:focus {
+            outline: none;
+            border-bottom-color: #9a4025;
+            box-shadow: none;
+        }
+
+        .luxury-shadow {
+            box-shadow: 0 20px 40px rgba(45, 45, 45, 0.03);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#767471",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdbd1",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "on-error-container": "#93000a",
+                        "outline": "#89726c",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "on-secondary-fixed-variant": "#4a463d",
+                        "on-primary-fixed": "#3b0900",
+                        "secondary": "#625e54",
+                        "inverse-surface": "#303030",
+                        "surface-container-highest": "#e4e2e1",
+                        "secondary-fixed": "#e9e2d5",
+                        "primary": "#9a4025",
+                        "on-tertiary-container": "#fcffe3",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-surface-variant": "#56423d",
+                        "background": "#fcf9f8",
+                        "tertiary": "#5d5c58",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-fixed-dim": "#ccc6b9",
+                        "tertiary-fixed": "#e5e2dd",
+                        "on-primary-fixed-variant": "#7e2b12",
+                        "on-primary-container": "#fffbff",
+                        "primary-fixed-dim": "#ffb5a0",
+                        "secondary-container": "#e6dfd2",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e4e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-container": "#676258",
+                        "outline-variant": "#dcc0b9",
+                        "on-secondary-fixed": "#1e1b13",
+                        "surface-tint": "#9d4227",
+                        "surface-container": "#f0eded",
+                        "surface-dim": "#dcd9d9",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#ffb5a0",
+                        "primary-container": "#ba573b",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c8c6c2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["EB Garamond"],
+                        "label-md": ["DM Sans"],
+                        "headline-lg": ["EB Garamond"],
+                        "body-md": ["DM Sans"],
+                        "body-lg": ["DM Sans"],
+                        "headline-md": ["EB Garamond"],
+                        "display-lg": ["EB Garamond"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16">
+<button aria-label="Menu" class="text-primary hover:opacity-70 transition-opacity flex items-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-widest">MoC Couture</h1>
+<button aria-label="Shopping Bag" class="text-primary hover:opacity-70 transition-opacity flex items-center">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</header>
+<main class="pt-24 pb-32">
+<!-- Hero Section -->
+<section class="px-margin-mobile md:px-margin-desktop mb-16 max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em]">Contact Us</span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface leading-tight">Handcrafted pieces, <br/>Personalized care.</h2>
+</div>
+</section>
+<!-- Contact Form & Details Grid -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+<!-- Contact Form -->
+<div class="md:col-span-7 bg-surface-container-low p-8 md:p-12 luxury-shadow">
+<form class="flex flex-col gap-10">
+<div class="relative">
+<input class="w-full input-underline font-body-lg text-body-lg py-2 focus:ring-0" id="name" name="name" placeholder="Full Name" type="text"/>
+</div>
+<div class="relative">
+<input class="w-full input-underline font-body-lg text-body-lg py-2 focus:ring-0" id="email" name="email" placeholder="Email Address" type="email"/>
+</div>
+<div class="relative">
+<textarea class="w-full input-underline font-body-lg text-body-lg py-2 focus:ring-0 resize-none" id="message" name="message" placeholder="Your Message" rows="4"></textarea>
+</div>
+<button class="bg-primary text-white font-label-md text-label-md py-4 px-12 self-start uppercase tracking-widest hover:opacity-90 transition-all active:scale-95" type="submit">
+                        Send Inquiry
+                    </button>
+</form>
+</div>
+<!-- Contact Options -->
+<div class="md:col-span-5 flex flex-col gap-12">
+<!-- Connect -->
+<div class="flex flex-col gap-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Connect</h3>
+<div class="flex flex-col gap-4">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">mail</span>
+<span class="font-body-lg text-body-lg border-b border-transparent group-hover:border-primary">atelier@moccouture.com</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">chat</span>
+<span class="font-body-lg text-body-lg border-b border-transparent group-hover:border-primary">WhatsApp Us</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+<span class="font-body-lg text-body-lg border-b border-transparent group-hover:border-primary">@moc_couture</span>
+</a>
+</div>
+</div>
+<!-- Visit Us -->
+<div class="flex flex-col gap-6 border-t border-outline-variant pt-12">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Visit Us</h3>
+<span class="font-label-md text-label-md bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full uppercase">Appointment Only</span>
+</div>
+<div class="flex flex-col gap-2">
+<p class="font-body-lg text-body-lg text-on-surface-variant">The Old Archive District, Studio 14</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">London, EC1V 9BD</p>
+</div>
+<div class="aspect-video w-full bg-surface-container-highest overflow-hidden luxury-shadow">
+<img alt="Luxury Atelier Interior" class="w-full h-full object-cover" data-alt="A minimalist, high-end fashion atelier interior with warm, soft lighting. The space features cream-colored walls and polished light wood floors. Elegant crochet garments are displayed on slender mannequins and hanging from minimalist metal rails. A large arched window lets in soft, natural daylight, casting gentle shadows across the serene, artisanal environment. The mood is sophisticated and peaceful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjLY_8_Hxzu2pNmrnJ_oMYJLsm4PKVO8A5OWsGAVKKwkSF5UzbPpAtp9gny8EML6SjvBWI_gA97iSpJV6YxYjaF-4-9Im-fMytq9PSSPxaZSMJX1TPt2x5QXwRDvOJ8JYB_AZUdDlP-WEpjPpQ3NS4SCbgsm-p4V_78cKRC9GoE95FRiEIgoKX-Ecb3gue4gymHfTlRhFrgBZIx5Qr1vRD5nbg5xIBbX4QwO8KBFKFzMv70SNRsrUurH1s_I309s8jSs08qWv96lY"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Spacer / Collection Teaser -->
+<section class="mt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="h-[1px] w-full bg-outline-variant/30 mb-24"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div class="order-2 md:order-1">
+<p class="font-headline-md text-headline-md italic text-primary leading-relaxed">
+                        "Every stitch tells a story of patience, every thread a commitment to the craft."
+                    </p>
+</div>
+<div class="order-1 md:order-2 h-80 overflow-hidden luxury-shadow">
+<img alt="Handcrafting detail" class="w-full h-full object-cover" data-alt="A macro close-up shot of skilled hands working with rich, terracotta-colored yarn and a wooden crochet hook. The lighting is low-key and dramatic, highlighting the intricate texture of the stitches and the soft fuzz of the natural fiber. The background is a soft-focus cream fabric, creating a warm, artisanal atmosphere that emphasizes slow fashion and hand-made luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1rP7bnf_8ECGwREmo2JEClq3FGsbg3W1e3KVbhxJeUWgilf2BIBrGBpxyIqNni60DINaaHqroZDzuhoVUdngPD9ubwJpi6rpzQa-dFMxiXZfRfixxpnZRckWUJaHObRYRVA548GWhrdwjGibmSV8eNEL_nopRlx6pRN_xKcpZWz62TN8m8X1J1Qcq-Mqs5QXRfgBlnAt6TcKKN-tPldvHl1GjOxo0cUxOrA5RBygvrMVSrz6AXuebSpSvMvLo3WdOxsf0LsMzrm4"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-margin-mobile py-16 text-center">
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-[0.2em]">MoC Couture</h2>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md opacity-80 hover:opacity-100" href="#">Instagram</a>
+<a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md opacity-80 hover:opacity-100" href="#">Pinterest</a>
+<a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md opacity-80 hover:opacity-100" href="#">Shipping</a>
+<a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md opacity-80 hover:opacity-100" href="#">Care Guide</a>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md">© 2024 MoC Couture. Handcrafted with intention.</p>
+</footer>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/95 backdrop-blur-md border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span class="font-label-md text-label-md">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-label-md text-label-md">Bag</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Contact</span>
+</a>
+</nav>
+<script>
+        // Simple form interaction
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerText = 'Sent Successfully';
+                btn.classList.replace('bg-primary', 'bg-tertiary-container');
+                e.target.reset();
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.replace('bg-tertiary-container', 'bg-primary');
+                    btn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+
+        // Sticky header transition
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

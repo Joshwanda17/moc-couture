@@ -3,6 +3,8 @@ const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dotenv = require('dotenv');
+const multer = require('multer');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
@@ -15,6 +17,24 @@ const JWT_SECRET = process.env.JWT_SECRET || 'moc_couture_secret_123';
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, uniqueSuffix + path.extname(file.originalname))
+  }
+});
+const upload = multer({ storage: storage });
 
 // Initialize SQLite database
 const dbPath = path.resolve(__dirname, 'database.sqlite');
@@ -114,6 +134,71 @@ app.post('/api/auth/login', (req, res) => {
 
     const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
     res.status(200).json({ token, user: { id: user.id, email: user.email, role: user.role } });
+  });
+});
+
+// --- UPLOAD ROUTE ---
+app.post('/api/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No image provided' });
+  }
+  const imageUrl = `/uploads/${req.file.filename}`;
+  res.status(200).json({ url: imageUrl });
+});
+
+// --- PRODUCT ROUTES ---
+app.get('/api/products', (req, res) => {
+  db.all('SELECT * FROM products', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+app.post('/api/products', (req, res) => {
+  const { name, description, price, category, main_image, featured, status, collection_id } = req.body;
+  const id = crypto.randomUUID();
+  db.run(
+    `INSERT INTO products (id, name, description, price, category, main_image, featured, status, collection_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [id, name, description, price, category, main_image, featured ? 1 : 0, status || 'draft', collection_id],
+    function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.status(201).json({ id, name, description, price, category, main_image, featured, status, collection_id });
+    }
+  );
+});
+
+app.delete('/api/products/:id', (req, res) => {
+  db.run('DELETE FROM products WHERE id = ?', [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(200).json({ message: 'Deleted successfully' });
+  });
+});
+
+// --- COLLECTION ROUTES ---
+app.get('/api/collections', (req, res) => {
+  db.all('SELECT * FROM collections', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+app.post('/api/collections', (req, res) => {
+  const { title, description, cover_image, season } = req.body;
+  const id = crypto.randomUUID();
+  db.run(
+    `INSERT INTO collections (id, title, description, cover_image, season) VALUES (?, ?, ?, ?, ?)`,
+    [id, title, description, cover_image, season],
+    function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.status(201).json({ id, title, description, cover_image, season });
+    }
+  );
+});
+
+app.delete('/api/collections/:id', (req, res) => {
+  db.run('DELETE FROM collections WHERE id = ?', [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(200).json({ message: 'Deleted successfully' });
   });
 });
 

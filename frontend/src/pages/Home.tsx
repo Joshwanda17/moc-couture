@@ -1,22 +1,7 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
 const Home = () => {
-  useEffect(() => {
-    const heroText = document.querySelector('h2');
-    if (heroText) {
-      heroText.style.opacity = '0';
-      heroText.style.transform = 'translateY(20px)';
-      heroText.style.transition = 'all 1s ease-out';
-      
-      setTimeout(() => {
-        heroText.style.opacity = '1';
-        heroText.style.transform = 'translateY(0)';
-      }, 300);
-    }
-  }, []);
-
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <Navbar />
@@ -28,21 +13,21 @@ const Home = () => {
             <div className="w-full h-full relative">
               <img 
                 className="w-full h-full object-cover" 
-                alt="A close-up, editorial fashion photograph of a handcrafted cream-colored crochet dress with intricate floral patterns." 
+                alt="A close-up, editorial fashion photograph of a handcrafted cream-colored crochet dress" 
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsdd3Azu2qmR0HapO4E-B3v1lAyK1kNqB0RVF-0dKgMuhb92Vb1-YHV8cw0S3lSsd4M5_nfgdSKmvbkA_OdiGy8W3Nck8r8OHqlzmNBbfApB1Nnt5Hosbi5U-ydvrUrNnG87SwM5u7c1dDMf7T8AkdYkC2o_8Vmq95XxPuZ-xTuksqV-0HTA4bTSwZM8f2y3M2u84fUHlKu9s3t_d6Xp8-c8jLTsX9_yqiw-74PbC4T22JpYQpF_Gaf4g5cMumqxlp71-TL1x4DkM"
               />
             </div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-center px-10 md:px-16 py-12 order-1 md:order-2">
             <span className="font-label-md text-label-md uppercase tracking-[0.2em] text-primary mb-6">Atelier Collection 2024</span>
-            <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8 leading-tight">
+            <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8 leading-tight animate-in fade-in slide-in-from-bottom-8 duration-1000">
               Handcrafted <br/>Crochet Fashion
             </h2>
             <p className="font-body-lg text-body-lg text-secondary max-w-md mb-10">
               A dialogue between traditional craftsmanship and contemporary silhouettes. Each piece is meticulously hand-knotted by artisans in our studio.
             </p>
             <div className="flex gap-4">
-              <Link to="/gallery">
+              <Link to="/collections">
                 <button className="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md rounded-DEFAULT hover:opacity-90 transition-all uppercase tracking-widest">
                   Shop Collection
                 </button>
@@ -70,7 +55,7 @@ const Home = () => {
                 <div className="relative overflow-hidden bg-secondary-container h-[500px]">
                   <img 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    alt="A wide editorial shot of a high-fashion model wearing an avant-garde crochet jacket made of chunky terracotta wool." 
+                    alt="A wide editorial shot of a high-fashion model wearing an avant-garde crochet jacket" 
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBveC2Q4Cez2jVAdnCBtSoFMEnRLH9MD7xpXJG-pAeHRiEj7-YbLdPhrkgcc3Ak2DiFRaEbUCHrmN1enOGUqZ_FHUKWQP5B5QB15VwxX6IJ3sC7GeLHRxKswDw-f5SnwwDq-Ph-yods7iaLcTGnKvNlQOd86u9EN46_Fiwl-qev3XGUluvvWPnmRntZPfYOOheYfSe3GCLZZaBmEA4vbh-fR8k229zFHi2BKyDQyfDwDOlcnxCH38QtGztPxgLf0SsbfayN520yBRY"
                   />
                   <div className="absolute inset-0 bg-black/5"></div>
@@ -82,37 +67,41 @@ const Home = () => {
               </Link>
             </div>
             
-            {/* Small Feature 1 & 2 */}
+            {/* Small Features */}
             <div className="md:col-span-4 flex flex-col gap-8">
-              <Link to="/collections" className="group cursor-pointer">
-                <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                  <img 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    alt="A studio photograph showcasing a delicate, ivory-toned crochet shawl draped over a minimalist wooden chair." 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyUXzzNOcyzxam0h_N71qrnfKb9yPuGTGq_ffmdpCDgU8gTTSpxrvIfNkUsesDLSdtFyuErije1E_i8nCehT-2-sxuWOdzXPoP-nnBP1F91xRcHrmLw6DZSLWg2bwzYWTwtX4Gd07sSNrVH05m4H76RxrXJLgBQCmVAqfn5ZGCee2-qRi54DU86_xiLQXPpysxf_bE9yaY3xZKmubAuUXa2F49GlJtEXUDztwSK6Xul2VYR4TBWs0D1rQ7yyHzyyuCEL2cbQ672yo"
-                  />
-                  <div className="absolute inset-0 bg-black/5"></div>
-                </div>
-                <div className="mt-4">
-                  <h4 className="font-headline-md text-headline-md text-primary">Ephemeral Lace</h4>
-                  <p className="font-body-md text-body-md text-secondary">Sheer textures for layered elegance.</p>
-                </div>
-              </Link>
+              <div className="group cursor-pointer">
+                <Link to="/collections">
+                  <div className="relative overflow-hidden bg-secondary-container h-[234px]">
+                    <img 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                      alt="A delicate, ivory-toned crochet shawl" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyUXzzNOcyzxam0h_N71qrnfKb9yPuGTGq_ffmdpCDgU8gTTSpxrvIfNkUsesDLSdtFyuErije1E_i8nCehT-2-sxuWOdzXPoP-nnBP1F91xRcHrmLw6DZSLWg2bwzYWTwtX4Gd07sSNrVH05m4H76RxrXJLgBQCmVAqfn5ZGCee2-qRi54DU86_xiLQXPpysxf_bE9yaY3xZKmubAuUXa2F49GlJtEXUDztwSK6Xul2VYR4TBWs0D1rQ7yyHzyyuCEL2cbQ672yo"
+                    />
+                    <div className="absolute inset-0 bg-black/5"></div>
+                  </div>
+                  <div className="mt-4">
+                    <h4 className="font-headline-md text-headline-md text-primary">Ephemeral Lace</h4>
+                    <p className="font-body-md text-body-md text-secondary">Sheer textures for layered elegance.</p>
+                  </div>
+                </Link>
+              </div>
               
-              <Link to="/collections" className="group cursor-pointer">
-                <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                  <img 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    alt="A lifestyle fashion shot of a woman in a sand-colored crochet maxi dress walking through a sun-drenched coastal landscape." 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmj_3MwEHbgGZ2ueMih9n3I6DDMmHbPZZYdoyOev2xXTj7-JTQ55fBkhayuXJwm6z1ywDsk6aUUFfJ3iTO78bKfqEO8UmaAVPjeLim6Q8677s9IHHNySL6Vtk1nbkTZB4k2G7Lu_Bw5IHnHUdN_BbGrup54A23lWDrcERa8dIoVk90ZLUXC7EWcSGl32QFKBiycvQ_jkeToX-EWCZII1CrAl6BoHw9ibEp8BZAWyafryM_TeS7YrSOwsrFgPOdjn4IQB0Z1w06VF4"
-                  />
-                  <div className="absolute inset-0 bg-black/5"></div>
-                </div>
-                <div className="mt-4">
-                  <h4 className="font-headline-md text-headline-md text-primary">Coastal Knits</h4>
-                  <p className="font-body-md text-body-md text-secondary">Natural fibers, ocean rhythms.</p>
-                </div>
-              </Link>
+              <div className="group cursor-pointer">
+                <Link to="/collections">
+                  <div className="relative overflow-hidden bg-secondary-container h-[234px]">
+                    <img 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                      alt="A lifestyle fashion shot of a woman in a sand-colored crochet maxi dress" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmj_3MwEHbgGZ2ueMih9n3I6DDMmHbPZZYdoyOev2xXTj7-JTQ55fBkhayuXJwm6z1ywDsk6aUUFfJ3iTO78bKfqEO8UmaAVPjeLim6Q8677s9IHHNySL6Vtk1nbkTZB4k2G7Lu_Bw5IHnHUdN_BbGrup54A23lWDrcERa8dIoVk90ZLUXC7EWcSGl32QFKBiycvQ_jkeToX-EWCZII1CrAl6BoHw9ibEp8BZAWyafryM_TeS7YrSOwsrFgPOdjn4IQB0Z1w06VF4"
+                    />
+                    <div className="absolute inset-0 bg-black/5"></div>
+                  </div>
+                  <div className="mt-4">
+                    <h4 className="font-headline-md text-headline-md text-primary">Coastal Knits</h4>
+                    <p className="font-body-md text-body-md text-secondary">Natural fibers, ocean rhythms.</p>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -124,7 +113,7 @@ const Home = () => {
               <div className="w-full max-w-sm aspect-[3/4] relative z-10 soft-shadow">
                 <img 
                   className="w-full h-full object-cover" 
-                  alt="A black and white, high-contrast photograph of an artisan's hands working with a crochet hook and natural linen yarn." 
+                  alt="An artisan's hands working with a crochet hook and natural linen yarn" 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB76D29kblTInBe1hVLIESwj1bOrwyeUC7xfSe8gIaUxDWuXGzmRkzAr6t4hfSQBeggRRUgHMd_4mqem7qtlJllG0jVvB0cXRH1nVX2lEcIRepuCOU31qp3JE3O6aDOcEl2L_nyy-Eq4X-NyLg-_-hSiXEuzN10fDbN5YVydpT-sFAKMTw4wL4hwv4_xIaSdaVeAv1cxjAPSSM-JcoiiTlrDijQ7KFH__7f_J1zCkpuCC9nBPHAFuySUobyA87vsjXXP6nNuNXQ3qQ"
                 />
               </div>
@@ -171,14 +160,14 @@ const Home = () => {
         </section>
       </main>
 
-      {/* Footer Component */}
+      {/* Footer */}
       <footer className="bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-5 md:px-16 py-16 text-center mb-16 md:mb-0">
         <h2 className="font-headline-md text-headline-md text-primary uppercase tracking-[0.2em]">MoC Couture</h2>
-        <div className="flex gap-8">
-          <Link to="#" className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all">Instagram</Link>
-          <Link to="#" className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all">Pinterest</Link>
-          <Link to="#" className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all">Shipping</Link>
-          <Link to="#" className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all">Care Guide</Link>
+        <div className="flex flex-wrap justify-center gap-8">
+          <Link className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" to="/contact">Contact</Link>
+          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
+          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
+          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
         </div>
         <p className="font-body-md text-body-md text-on-surface-variant max-w-xs md:max-w-none">
           © 2024 MoC Couture. Handcrafted with intention.

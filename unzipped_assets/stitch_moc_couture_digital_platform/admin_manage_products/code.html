@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoC Couture | Admin Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'ebGaramond';
+            src: url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+        }
+        @font-face {
+            font-family: 'dmSans';
+            src: url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+        }
+        body {
+            font-family: 'dmSans', sans-serif;
+            background-color: #fcf9f8;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            background-attachment: fixed;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#625e54",
+                        "on-primary-fixed": "#3b0900",
+                        "surface-variant": "#e4e2e1",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f3f0f0",
+                        "tertiary": "#5d5c58",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "outline": "#89726c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#7e2b12",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed-dim": "#ffb5a0",
+                        "primary-fixed": "#ffdbd1",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "primary-container": "#ba573b",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-container": "#f0eded",
+                        "on-primary-container": "#fffbff",
+                        "secondary-container": "#e6dfd2",
+                        "on-surface-variant": "#56423d",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#767471",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#e9e2d5",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "background": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#676258",
+                        "primary": "#9a4025",
+                        "outline-variant": "#dcc0b9",
+                        "inverse-surface": "#303030",
+                        "surface-container-high": "#eae7e7",
+                        "surface-tint": "#9d4227",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed-dim": "#ccc6b9",
+                        "inverse-primary": "#ffb5a0",
+                        "surface": "#fcf9f8",
+                        "on-secondary-fixed": "#1e1b13",
+                        "on-secondary-fixed-variant": "#4a463d",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#fcffe3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["ebGaramond"],
+                        "headline-lg": ["ebGaramond"],
+                        "body-lg": ["dmSans"],
+                        "body-md": ["dmSans"],
+                        "label-md": ["dmSans"],
+                        "display-lg-mobile": ["ebGaramond"],
+                        "display-lg": ["ebGaramond"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<div class="grain-overlay"></div>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-70 transition-opacity">menu</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-widest">MoC Couture</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="hidden md:block font-label-md text-label-md text-secondary uppercase tracking-widest">Admin Portal</span>
+<button class="material-symbols-outlined text-primary hover:opacity-70 transition-opacity">shopping_bag</button>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- Sidebar Drawer (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col p-6 gap-4 h-full w-80 bg-surface shadow-2xl sticky top-16">
+<div class="font-headline-md text-headline-md text-on-surface mb-4">MoC Couture</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-secondary-container rounded-full transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-body-lg text-body-lg">Collections</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">kitchen</span>
+<span class="font-body-lg text-body-lg">Atelier</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-lg text-body-lg">Archive</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-body-lg text-body-lg">Journal</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-body-lg text-body-lg">Contact</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 px-margin-mobile md:px-margin-desktop py-12">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Products</h1>
+<p class="font-body-md text-body-md text-secondary mt-2">Manage your handcrafted crochet collection and stock.</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-none font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-2 group shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">add</span>
+                    Add Product
+                </button>
+</div>
+<!-- Stats Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-12">
+<div class="bg-surface-container-low p-6 border-b border-outline-variant/30">
+<span class="font-label-md text-label-md text-secondary uppercase">Total Products</span>
+<div class="font-headline-md text-headline-md mt-1">42</div>
+</div>
+<div class="bg-surface-container-low p-6 border-b border-outline-variant/30">
+<span class="font-label-md text-label-md text-secondary uppercase">Published</span>
+<div class="font-headline-md text-headline-md mt-1">38</div>
+</div>
+<div class="bg-surface-container-low p-6 border-b border-outline-variant/30">
+<span class="font-label-md text-label-md text-secondary uppercase">Drafts</span>
+<div class="font-headline-md text-headline-md mt-1">4</div>
+</div>
+<div class="bg-surface-container-low p-6 border-b border-outline-variant/30">
+<span class="font-label-md text-label-md text-secondary uppercase">Low Stock</span>
+<div class="font-headline-md text-headline-md mt-1 text-primary">2</div>
+</div>
+</div>
+<!-- Product Table/List -->
+<div class="bg-white/40 backdrop-blur-sm border border-outline-variant/20 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="p-6 font-label-md text-label-md text-secondary uppercase tracking-widest">Product</th>
+<th class="p-6 font-label-md text-label-md text-secondary uppercase tracking-widest">Category</th>
+<th class="p-6 font-label-md text-label-md text-secondary uppercase tracking-widest">Status</th>
+<th class="p-6 font-label-md text-label-md text-secondary uppercase tracking-widest">Price</th>
+<th class="p-6 font-label-md text-label-md text-secondary uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Item 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-20 bg-secondary-container flex-shrink-0 relative overflow-hidden">
+<img alt="Crochet Top" class="w-full h-full object-cover" data-alt="A close-up studio shot of a finely handcrafted white crochet summer top, showcasing intricate floral patterns and organic yarn textures. The lighting is soft and airy, creating a serene, luxury atelier mood. The background is a soft cream fabric, maintaining a minimalist and tactile high-fashion aesthetic consistent with slow fashion principles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZKdvSo7aRm838jhi1IZnTu_pOLRLST6_V5PoLXLHGaKBoY62uw_aVjgX8SkvrYG2pKz0OuIl_pG4QM3G9P5IIvzUgcL06YIyEAFF88dD5MhWY1u-GDp5kcJcDrKNe-xA-xDuLAybkCiWyih8qzTjXKZVDqFSrTsXRwyIihAL7kA-OugwDak2Mt_tZhmWMV91zRHXwKX0gpuldCqvY-ZTGh1_anI0XtWMkZ8ez5MvE4CWTGQSxr3bKwB6zbxeI3h86f2p7VEDEM-0"/>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-medium">Gossamer Lace Vest</div>
+<div class="font-label-md text-label-md text-secondary">SKU: MC-2024-001</div>
+</div>
+</div>
+</td>
+<td class="p-6 font-body-md text-body-md text-tertiary">Summer Archive</td>
+<td class="p-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 font-label-md text-label-md uppercase tracking-tighter">Published</span>
+</td>
+<td class="p-6 font-body-lg text-body-lg">$320.00</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-3">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</div>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-20 bg-secondary-container flex-shrink-0 relative overflow-hidden">
+<img alt="Linen Pants" class="w-full h-full object-cover" data-alt="A minimalist fashion editorial image of high-waisted sand-colored linen trousers draped over a vintage wooden chair. The scene is bathed in warm, diffused natural sunlight, casting soft ambient shadows that highlight the natural texture of the fabric. The composition is clean and spacious, emphasizing a high-end, intentional lifestyle and artisanal craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqcdSh2S5_7o8eJJIk-QObDPz1mMgWCuMWgk8vih1pteBgAEWFgjqMoWoJmpL3IxCrzu_LUXdsKYWCKR0HjJ_OLkvg8GXdQbUcFz20y0uDMst2ddoc9MetoQvQ2RVCrFFMPrzj-evkxdVoFURnlfuAMgokzfCklb5pzC0cJxBjx6Ye_oxmBNyj5-uFQU1up3xn6wajFKST7RmF_hKB_wqUcBvZs9Zi8iph7WlsqQWLuWQe5Hyp0JXtX9DrL6HnWAkSWN-XyKil2d0"/>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-medium">Terra Cotta Shrug</div>
+<div class="font-label-md text-label-md text-secondary">SKU: MC-2024-042</div>
+</div>
+</div>
+</td>
+<td class="p-6 font-body-md text-body-md text-tertiary">Atelier Selects</td>
+<td class="p-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md uppercase tracking-tighter">Draft</span>
+</td>
+<td class="p-6 font-body-lg text-body-lg">$185.00</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-3">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</div>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-20 bg-secondary-container flex-shrink-0 relative overflow-hidden">
+<img alt="Wool Cardigan" class="w-full h-full object-cover" data-alt="A luxurious, thick-knit charcoal wool cardigan folded neatly on a textured cream surface. The image highlights the intricate crochet loops and heavy yarn weight, evoking a sense of warmth and deliberate slow fashion. The lighting is moody and directional, creating deep, soft shadows and emphasizing the tactile, artisanal quality of the garment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBum0egks9aBXdRl501dQzHK2DROm9FYeF4sPLeGXCp9cWFDptEeJ2lVQwSxSpWw5Le4XCRjvLkzovUdKX_jKPj5xq5Osbw6jT1AGs6nhlemRcq_Eyki7oznOQv_jB_cC1GKC722I5IGXu_j9KgGeEFqbDoodTkKNf0y9aqbYDbnKbA4IeLAPNfrhiXjfOS8kY4g7jKHSm5LBurihhuH465VjsZQ-Rfy1LTBirtXvgUHLhl10khewOtzMSljXWTGzxIp8a1DWn0-ss"/>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-medium">Midnight Drift Cardigan</div>
+<div class="font-label-md text-label-md text-secondary text-primary">Low Stock: 2 left</div>
+</div>
+</div>
+</td>
+<td class="p-6 font-body-md text-body-md text-tertiary">Winter Collection</td>
+<td class="p-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 font-label-md text-label-md uppercase tracking-tighter">Published</span>
+</td>
+<td class="p-6 font-body-lg text-body-lg">$450.00</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-3">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 flex items-center justify-between border-t border-outline-variant/20">
+<span class="font-label-md text-label-md text-secondary">Showing 1-10 of 42 products</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/30 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/30 hover:bg-surface-variant transition-colors bg-secondary-container">
+                            1
+                        </button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/30 hover:bg-surface-variant transition-colors">
+                            2
+                        </button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/30 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-margin-mobile py-16 text-center">
+<div class="font-headline-md text-headline-md text-primary">MoC Couture</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all opacity-80 hover:opacity-100" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all opacity-80 hover:opacity-100" href="#">Pinterest</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all opacity-80 hover:opacity-100" href="#">Shipping</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all opacity-80 hover:opacity-100" href="#">Care Guide</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2024 MoC Couture. Handcrafted with intention.</p>
+</footer>
+<!-- Bottom Nav for Mobile -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/95 border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary transition-all duration-300">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span class="font-label-md text-label-md">Collections</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-label-md text-label-md">Bag</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary-container transition-all duration-300">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.3s ease';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Search/Filter placeholder interaction
+        console.log("Admin Interface Loaded: MoC Couture Product Management");
+    </script>
+</body></html>

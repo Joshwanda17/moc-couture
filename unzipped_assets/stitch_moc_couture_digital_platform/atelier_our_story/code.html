@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --cream: #fcf9f8;
+            --sand: #f0eded;
+            --noise-opacity: 0.02;
+        }
+        body {
+            background-color: var(--cream);
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            opacity: var(--noise-opacity);
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px rgba(45, 45, 45, 0.04);
+        }
+        .parallax-section {
+            clip-path: inset(0 0 0 0);
+        }
+        @media (min-width: 768px) {
+            .desktop-grid {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 24px;
+                padding-left: 64px;
+                padding-right: 64px;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#767471",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#ffdbd1",
+                      "on-tertiary-fixed-variant": "#474743",
+                      "on-error-container": "#93000a",
+                      "outline": "#89726c",
+                      "on-primary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-fixed": "#1c1c19",
+                      "on-secondary-fixed-variant": "#4a463d",
+                      "on-primary-fixed": "#3b0900",
+                      "secondary": "#625e54",
+                      "inverse-surface": "#303030",
+                      "surface-container-highest": "#e4e2e1",
+                      "secondary-fixed": "#e9e2d5",
+                      "primary": "#9a4025",
+                      "on-tertiary-container": "#fcffe3",
+                      "on-surface": "#1b1c1c",
+                      "surface": "#fcf9f8",
+                      "on-surface-variant": "#56423d",
+                      "background": "#fcf9f8",
+                      "tertiary": "#5d5c58",
+                      "surface-container-high": "#eae7e7",
+                      "secondary-fixed-dim": "#ccc6b9",
+                      "tertiary-fixed": "#e5e2dd",
+                      "on-primary-fixed-variant": "#7e2b12",
+                      "on-primary-container": "#fffbff",
+                      "primary-fixed-dim": "#ffb5a0",
+                      "secondary-container": "#e6dfd2",
+                      "on-background": "#1b1c1c",
+                      "surface-variant": "#e4e2e1",
+                      "surface-bright": "#fcf9f8",
+                      "on-secondary-container": "#676258",
+                      "outline-variant": "#dcc0b9",
+                      "on-secondary-fixed": "#1e1b13",
+                      "surface-tint": "#9d4227",
+                      "surface-container": "#f0eded",
+                      "surface-dim": "#dcd9d9",
+                      "inverse-on-surface": "#f3f0f0",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#ffb5a0",
+                      "primary-container": "#ba573b",
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#c8c6c2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "unit": "8px",
+                      "margin-desktop": "64px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": ["EB Garamond"],
+                      "label-md": ["DM Sans"],
+                      "headline-lg": ["EB Garamond"],
+                      "body-md": ["DM Sans"],
+                      "body-lg": ["DM Sans"],
+                      "headline-md": ["EB Garamond"],
+                      "display-lg": ["EB Garamond"]
+              },
+              "fontSize": {
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16 md:px-margin-desktop">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity" data-icon="menu">menu</span>
+<div class="hidden md:flex gap-8 ml-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Collections</a>
+<a class="font-label-md text-label-md text-primary font-bold" href="#">Atelier</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Archive</a>
+</div>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-widest md:text-headline-md">MoC Couture</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</nav>
+<main class="pt-16 pb-32">
+<!-- Hero Section -->
+<header class="px-margin-mobile md:px-margin-desktop pt-12 md:pt-24 mb-16 md:mb-32">
+<div class="max-w-container-max mx-auto">
+<p class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] mb-4">The Atelier</p>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface max-w-3xl">Our Story: A Dialogue Between Thread and Time</h1>
+</div>
+</header>
+<!-- Story Image Full -->
+<section class="mb-20 md:mb-40">
+<div class="w-full h-[530px] md:h-[707px] relative overflow-hidden">
+<img alt="Close-up of crochet process" class="w-full h-full object-cover" data-alt="A macro photograph of skilled hands weaving a complex crochet pattern with thick, cream-colored organic cotton yarn. The lighting is soft and directional, coming from a side window, highlighting the intricate texture and rhythmic loops of the fabric. The background is a blurred, warm-toned atelier with wooden surfaces and spools of thread. The mood is focused, serene, and deeply artisanal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuXIgyFaeZ_Z3LG_QfTarSoA9hbayynmpJ--zExwnBmrFhj0XfNbambesqAZL7ObOfrfCmN1QiWvOFxO7ZUIY3jNyHo65Ha31KGmsgehk3Rhx4iI378Cm9_22HSbh8rSOIvb5s0Kr5u8lbNqujLeIDdRx1h1mpSv_LW4Egk2wP3Ffx7ODvNwqw_PNGxNZ1B27QWL0jLrLQgLEe71XV_JcNEaySKn9uKi7_AgMW_vmagLXuim8l5YRAgMAHPgoy7kYYmvFPzw_389I"/>
+<div class="absolute inset-0 bg-black/5"></div>
+</div>
+</section>
+<!-- The Hands Behind the Hook -->
+<section class="px-margin-mobile md:px-margin-desktop mb-24 md:mb-48">
+<div class="max-w-container-max mx-auto md:grid md:grid-cols-12 md:gap-gutter">
+<div class="md:col-span-5 mb-12 md:mb-0">
+<img alt="The Founder in studio" class="w-full aspect-[4/5] object-cover editorial-shadow" data-alt="A portrait of a serene female designer in her mid-thirties standing in a sunlit, minimalist studio. She is draped in a hand-crocheted silk shawl of burnt terracotta hue. The room is filled with large ceramic vases, sketches pinned to white walls, and baskets of raw fiber. The morning light creates soft shadows across the space, evoking a feeling of slow, intentional craftsmanship and luxury fashion design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPK7K3N6Bfjpu-KP6V9MlJaCkjVJ0UoPWboTTt2PkDFhQvQQf9vyXKuJM57x3KtGTPlNvBwFLGeI8LFQBJZhuuollDf1mpkRX73Sar8DFZAJ6_sPATlFahIUF4ER2IUPPC8yJAZKWo31jjJPK07-1DDGDJil2EIUOI5qTpZWFw6pNYL1TnqsgpmoRQgUUokmaLoVgqak0wYgxmcZ00apCgGE4jwvH3MJdf3dMHsAmMF9Io_9AnJbQKI0Tonpq19SHjEfnfkhEyB2w"/>
+</div>
+<div class="md:col-span-6 md:col-start-7 flex flex-col justify-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-8">The Hands Behind the Hook</h2>
+<div class="space-y-6 font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+<p>Founded by Elena Vance, MoC Couture was born from a singular obsession: the architecture of the stitch. In a world of fleeting trends, we choose the permanence of the handmade.</p>
+<p>Our philosophy of "Slow Craft" is an invitation to pause. Every garment is a labor of intention, taking upwards of sixty hours to manifest from a single spool of thread into a sculptural silhouette. This isn't just clothing; it is a tactile record of time.</p>
+<p>Elena's vision marries the rustic honesty of traditional crochet with the exacting standards of high-fashion draping, creating pieces that feel as much like art as they do armor.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quote Section -->
+<section class="bg-secondary-container py-24 md:py-40 mb-24 md:mb-48">
+<div class="px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-8" data-icon="format_quote">format_quote</span>
+<blockquote class="font-display-lg-mobile text-display-lg-mobile md:font-headline-lg md:text-headline-lg text-primary italic leading-tight">
+                    "When we crochet, we are not just making garments; we are weaving patience into the very fabric of our lives. Intentionality is our finest thread."
+                </blockquote>
+<cite class="block mt-8 font-label-md text-label-md uppercase tracking-widest text-on-secondary-container">— Elena Vance, Founder</cite>
+</div>
+</section>
+<!-- Materials Section: Bento Grid -->
+<section class="px-margin-mobile md:px-margin-desktop mb-24 md:mb-48 max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Our Materials</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-4">Sourced with conscience. Crafted for longevity.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Organic Cotton Card -->
+<div class="bg-surface-container-low p-8 md:p-12 flex flex-col items-center text-center editorial-shadow transition-transform hover:-translate-y-2 duration-500">
+<img alt="Organic Cotton" class="w-48 h-48 rounded-full object-cover mb-8" data-alt="A close-up photograph of raw, unspun organic cotton fibers resting on a neutral linen surface. The fibers are soft, fluffy, and pure white, bathed in warm, bright studio lighting that emphasizes their natural purity. The composition is clean and minimalist, showcasing the organic texture of the material as the foundation of sustainable luxury crochet." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFA5mYQCQYdY9tlrjL_i5QkEnURhf_Neb_Nax5bJVVGXnT_UAtixCy3-9s3lC56iwtdKxtid5HKZQdE8glF0TFxvs28ZXer-zxI7-WIEdOZRTddGpREFS4MtoxTokfoPu4jK0Y_ymIs1mL5FEPLNreBKlQm9sr6tSLzPF2PAxJ9AA8VwmjXuNcmvwreixiBk3SXvUUYHzFbNUf8RUR0VyNL9_TIb23aWgbKy_pwLnt_PlVO7KMUFSZrTVHbUvkh2l9dBGIvW2ycmo"/>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">GOTS Organic Cotton</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">Long-staple fibers harvested from ethical farms in Egypt. Chosen for its breathability and its ability to hold the crisp structural definition of our signature stitches.</p>
+<span class="inline-block px-4 py-2 bg-sand rounded-full font-label-md text-label-md text-primary">Soft &amp; Structural</span>
+</div>
+<!-- Mulberry Silk Card -->
+<div class="bg-surface-container-low p-8 md:p-12 flex flex-col items-center text-center editorial-shadow transition-transform hover:-translate-y-2 duration-500">
+<img alt="Mulberry Silk" class="w-48 h-48 rounded-full object-cover mb-8" data-alt="Lustrous strands of mulberry silk thread in a soft champagne color, draped elegantly over a dark wooden loom. The lighting is moody and dramatic, with a single spotlight catching the shimmering sheen of the silk. The texture appears incredibly smooth and high-end, representing the luxurious and delicate materials used in MoC Couture atelier." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK1bvNvvDi0PWxNKiySy6qsEub15YGfrklHP_Ai7FGyIuvLfA_zbwY_MlKL-YxjecYvWUA8vUEiqFUnTaLsnvxrqb3mhnMTwQyB8J3sxbRf0HdJn1iNQEQ9ubkOzJEAhjTReuNJL0mBLHl4tIRYyx2eo1PVTC6peauIHAYKFny39Ea2Wx1SX5NzLLs5WHZEPPy7t6ongse6-b1l_dneBBRP9KpEk6-5e7_janWHG8lOvPtPNwiknifnQ4c4qUzI6S6a4DuJwHNBvw"/>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Mulberry Silk</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">A material of liquid light. We use grade 6A silk for our evening collections, offering a drape that mimics the movement of water against the skin.</p>
+<span class="inline-block px-4 py-2 bg-sand rounded-full font-label-md text-label-md text-primary">Fluid &amp; Luminous</span>
+</div>
+</div>
+</section>
+<!-- Studio Environment - Final Image -->
+<section class="px-margin-mobile md:px-margin-desktop mb-24 max-w-container-max mx-auto">
+<div class="relative h-[400px] md:h-[600px] w-full overflow-hidden">
+<img alt="The Studio atmosphere" class="w-full h-full object-cover grayscale opacity-80" data-alt="A wide-angle shot of a bright, airy fashion atelier with high ceilings and industrial windows. Mannequins draped in half-finished crochet garments stand scattered throughout the space. Large tables are covered in mood boards, sketches, and overflowing baskets of yarn in earthy tones. The overall aesthetic is one of creative chaos balanced by professional minimalism, captured in a soft, monochromatic film style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACAxcgmChlH1OWXHBaeR09DnSaKLsw9RNgrQ8rEf6CBXlosj2vC7HIgYbbtgLKnkslrnLqw1W_91zjx27tLPlX6FGW7CZ5bBTL6YxRGG8zgJ-hEdGzHGZOhbMUcMXwYpBYIZb7YHg5a_Y-HM10NOB57zfB4BGLe15U8E6uKFvzq19aJTQaziS81WW95BYpZWPwH_CgUftwUK57tRWRp4KKQ8BRPCn8Y5j75oLrN5FXqErQkjg08JLS9nR3LO46ZIzlKMr_G2rfN2U"/>
+<div class="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-[2px]">
+<div class="text-center p-8 max-w-lg">
+<p class="font-headline-md text-headline-md text-on-surface mb-4">Visit the Atelier</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">By appointment only. Experience the rhythm of the hook in person at our London workspace.</p>
+<button class="px-10 py-4 bg-primary text-white font-label-md text-label-md hover:opacity-90 transition-all uppercase tracking-widest">Inquire Now</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-margin-mobile py-16 text-center">
+<span class="font-headline-md text-headline-md text-primary uppercase tracking-[0.3em]">MoC Couture</span>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Pinterest</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80 mt-4">© 2024 MoC Couture. Handcrafted with intention.</p>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-background/95 backdrop-blur-sm border-t border-outline-variant/30 flex justify-around items-center h-16 pb-safe">
+<div class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-[10px] uppercase mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="auto_awesome_motion">auto_awesome_motion</span>
+<span class="font-label-md text-[10px] uppercase mt-1">Collections</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-label-md text-[10px] uppercase mt-1">Bag</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-[10px] uppercase mt-1">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions for scrolling
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('header img');
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+
+        // Simple Fade-in animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('section, header');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                el.style.transitionDelay = `${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>
