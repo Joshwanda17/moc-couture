@@ -10,16 +10,22 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-subtle">
+      <div className="min-h-screen bg-surface pb-16">
         <Navbar cartItemCount={0} />
-        <main className="container mx-auto px-4 py-12 max-w-4xl">
-          <div className="text-center animate-fade-in">
-            <h1 className="text-5xl font-display font-bold mb-4">Your Cart</h1>
-            <p className="text-xl text-muted-foreground mb-8">
+        <main className="container mx-auto px-4 pt-32 pb-12 max-w-4xl flex flex-col items-center">
+          <div className="text-center animate-fade-in w-full">
+            <h1 className="text-5xl md:text-6xl font-display font-extrabold text-[#02182b] mb-6 tracking-tight">
+              Your Cart
+            </h1>
+            <p className="text-xl text-secondary/80 font-body mb-16">
               Your cart is empty
             </p>
             <Link to="/gallery">
-              <Button size="lg" className="bg-gradient-warm hover:opacity-90">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                className="text-white hover:text-white/80 hover:bg-transparent font-body"
+              >
                 Continue Shopping
               </Button>
             </Link>
