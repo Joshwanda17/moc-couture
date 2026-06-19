@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { api } from "@/lib/api";
 
 const Home = () => {
-  const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
+  const [bestSellers, setBestSellers] = useState<any[]>([]);
+  const [newArrivals, setNewArrivals] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const products = await api.getProducts();
-        // Just take the first 3 products for the featured section
-        setFeaturedProducts(products.slice(0, 3));
+        // Assuming we have at least 8 products, slice them up for demo purposes
+        setBestSellers(products.slice(0, 4));
+        setNewArrivals(products.slice(4, 8).length > 0 ? products.slice(4, 8) : products.slice(0, 4));
       } catch (err) {
         console.error(err);
       }
@@ -20,182 +23,278 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-background text-on-surface min-h-screen">
+    <div className="bg-background text-on-surface min-h-screen font-body overflow-x-hidden">
       <Navbar />
       
-      <main className="pt-16 pb-24 md:pb-0">
-        {/* Hero Section */}
-        <section className="relative h-[795px] flex flex-col md:flex-row items-center overflow-hidden mb-24 md:mb-32">
-          <div className="w-full md:w-1/2 h-full order-2 md:order-1">
-            <div className="w-full h-full relative">
-              <img 
-                className="w-full h-full object-cover" 
-                alt="A close-up, editorial fashion photograph of a handcrafted cream-colored crochet dress" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsdd3Azu2qmR0HapO4E-B3v1lAyK1kNqB0RVF-0dKgMuhb92Vb1-YHV8cw0S3lSsd4M5_nfgdSKmvbkA_OdiGy8W3Nck8r8OHqlzmNBbfApB1Nnt5Hosbi5U-ydvrUrNnG87SwM5u7c1dDMf7T8AkdYkC2o_8Vmq95XxPuZ-xTuksqV-0HTA4bTSwZM8f2y3M2u84fUHlKu9s3t_d6Xp8-c8jLTsX9_yqiw-74PbC4T22JpYQpF_Gaf4g5cMumqxlp71-TL1x4DkM"
-              />
-            </div>
+      <main className="pb-12 md:pb-0">
+        {/* 3. Hero Section */}
+        <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img 
+              className="w-full h-full object-cover object-center" 
+              alt="Luxury Crochet Fashion Model" 
+              src="/images/crochet-business/490f108b6ffcb2bfe511fdb9228c5750.jpg"
+            />
+            <div className="absolute inset-0 bg-black/40"></div>
           </div>
-          <div className="w-full md:w-1/2 flex flex-col justify-center px-10 md:px-16 py-12 order-1 md:order-2">
-            <span className="font-label-md text-label-md uppercase tracking-[0.2em] text-primary mb-6">Atelier Collection 2024</span>
-            <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8 leading-tight animate-in fade-in slide-in-from-bottom-8 duration-1000">
-              Handcrafted <br/>Crochet Fashion
+          
+          <div className="relative z-10 text-center px-5 flex flex-col items-center mt-16">
+            <h2 className="font-display text-5xl md:text-7xl text-white mb-6 leading-tight animate-in fade-in slide-in-from-bottom-8 duration-1000 max-w-4xl">
+              Luxury Crochet & Fabric Fashion
             </h2>
-            <p className="font-body-lg text-body-lg text-secondary max-w-md mb-10">
-              A dialogue between traditional craftsmanship and contemporary silhouettes. Each piece is meticulously hand-knotted by artisans in our studio.
+            <p className="font-body text-lg md:text-xl text-white/90 max-w-2xl mb-10">
+              Handcrafted pieces designed to celebrate individuality.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/collections">
-                <button className="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md rounded-DEFAULT hover:opacity-90 transition-all uppercase tracking-widest">
-                  Shop Collection
+                <button className="bg-white text-black px-10 py-4 font-body uppercase tracking-widest text-sm hover:bg-white/90 transition-all w-full sm:w-auto">
+                  Explore Collection
+                </button>
+              </Link>
+              <Link to="/gallery">
+                <button className="border border-white text-white px-10 py-4 font-body uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all w-full sm:w-auto">
+                  Shop Now
                 </button>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Featured Collections (Bento Style) */}
-        <section className="max-w-container-max mx-auto px-5 md:px-16 mb-24 md:mb-40">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <h3 className="font-headline-lg text-headline-lg mb-2">Featured Series</h3>
-              <p className="font-body-md text-body-md text-secondary">Exploration of form and fiber.</p>
+        {/* 4. Featured Collections */}
+        <section className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="font-display text-3xl md:text-4xl mb-4">Featured Collections</h3>
+            <div className="w-16 h-0.5 bg-primary mx-auto"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Collection Cards */}
+            {[
+              { title: 'Crochet Bags', img: '/images/crochet-business/071aeb9629cd90ec04a7ae3e125e65e2.jpg', desc: 'Handwoven statement pieces' },
+              { title: 'Spring Collection', img: '/images/crochet-business/07ee90c84a60e432972c47babc17ed8c.jpg', desc: 'Lightweight & breezy' },
+              { title: 'Signature Wear', img: '/images/crochet-business/0fa695a1d815a35004c82928ac636a2d.webp', desc: 'Our iconic designs' },
+              { title: 'Accessories', img: '/images/crochet-business/48eca36e3c911c9cda0dbbc0b6e12815.jpg', desc: 'The perfect finishing touch' }
+            ].map((collection, idx) => (
+              <Link to="/collections" key={idx} className="group cursor-pointer block">
+                <div className="relative overflow-hidden aspect-[4/5] mb-4">
+                  <img src={collection.img} alt={collection.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                </div>
+                <h4 className="font-display text-xl uppercase tracking-wider">{collection.title}</h4>
+                <p className="text-secondary text-sm mt-1">{collection.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. Brand Story Section */}
+        <section className="bg-surface-container-low py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-5 md:px-16 grid grid-cols-1 md:grid-cols-2 items-center gap-16">
+            <div className="relative">
+              <img 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB76D29kblTInBe1hVLIESwj1bOrwyeUC7xfSe8gIaUxDWuXGzmRkzAr6t4hfSQBeggRRUgHMd_4mqem7qtlJllG0jVvB0cXRH1nVX2lEcIRepuCOU31qp3JE3O6aDOcEl2L_nyy-Eq4X-NyLg-_-hSiXEuzN10fDbN5YVydpT-sFAKMTw4wL4hwv4_xIaSdaVeAv1cxjAPSSM-JcoiiTlrDijQ7KFH__7f_J1zCkpuCC9nBPHAFuySUobyA87vsjXXP6nNuNXQ3qQ" 
+                alt="MoC Couture Founder Crafting" 
+                className="w-full h-auto object-cover soft-shadow z-10 relative"
+              />
+              <div className="absolute -bottom-6 -right-6 w-full h-full border border-primary z-0 hidden md:block"></div>
             </div>
-            <Link to="/collections" className="font-label-md text-label-md text-primary underline underline-offset-8 hover:opacity-70 transition-all">
+            <div>
+              <h3 className="font-display text-3xl md:text-5xl mb-8">The MoC Couture Story</h3>
+              <p className="font-body text-lg text-secondary mb-6 leading-relaxed">
+                At MoC Couture, every piece is handcrafted using a blend of traditional crochet artistry and modern fabric design.
+              </p>
+              <p className="font-body text-lg text-secondary mb-10 leading-relaxed italic border-l-2 border-primary pl-6">
+                "We weave heritage into modern silhouettes, creating artifacts of personal expression that last lifetimes."
+              </p>
+              <Link to="/about">
+                <button className="border-b border-primary text-primary pb-1 font-body uppercase tracking-widest text-sm hover:opacity-70 transition-opacity inline-flex items-center gap-2">
+                  Read Our Story <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. Best Sellers Section */}
+        <section className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="font-display text-3xl md:text-4xl mb-4">Our Most Loved Pieces</h3>
+            <div className="w-16 h-0.5 bg-primary mx-auto"></div>
+          </div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-8">
+            {bestSellers.map((product) => (
+              <Link to={`/product/${product.id}`} key={`bs-${product.id}`} className="group">
+                <div className="relative overflow-hidden aspect-[3/4] mb-4 bg-secondary-container">
+                  <img src={product.main_image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+                <h4 className="font-display text-lg mb-1 group-hover:text-primary transition-colors">{product.name}</h4>
+                <p className="text-secondary text-sm">UGX {(product.price * 3700).toLocaleString()}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* 7. New Arrivals Section */}
+        <section className="pb-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+          <div className="flex justify-between items-end mb-12 border-b border-outline-variant/30 pb-4">
+            <h3 className="font-display text-3xl md:text-4xl">New Arrivals</h3>
+            <Link to="/gallery" className="text-sm font-body uppercase tracking-widest text-secondary hover:text-primary transition-colors">
               View All
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Large Feature */}
-            {featuredProducts[0] && (
-              <div className="md:col-span-8 group cursor-pointer">
-                <Link to={`/product/${featuredProducts[0].id}`}>
-                  <div className="relative overflow-hidden bg-secondary-container h-[500px]">
-                    <img 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                      alt={featuredProducts[0].name} 
-                      src={featuredProducts[0].main_image}
-                    />
-                    <div className="absolute inset-0 bg-black/5"></div>
-                    <div className="absolute bottom-8 left-8 text-white">
-                      <span className="font-label-md text-label-md uppercase tracking-widest block mb-2">Signature</span>
-                      <h4 className="font-headline-md text-headline-md">{featuredProducts[0].name}</h4>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            )}
-            
-            {/* Small Features */}
-            <div className="md:col-span-4 flex flex-col gap-8">
-              {featuredProducts[1] && (
-                <div className="group cursor-pointer">
-                  <Link to={`/product/${featuredProducts[1].id}`}>
-                    <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                      <img 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                        alt={featuredProducts[1].name} 
-                        src={featuredProducts[1].main_image}
-                      />
-                      <div className="absolute inset-0 bg-black/5"></div>
-                    </div>
-                    <div className="mt-4">
-                      <h4 className="font-headline-md text-headline-md text-primary">{featuredProducts[1].name}</h4>
-                      <p className="font-body-md text-body-md text-secondary">UGX {(featuredProducts[1].price * 3700).toLocaleString()}</p>
-                    </div>
-                  </Link>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-8">
+            {newArrivals.map((product) => (
+              <Link to={`/product/${product.id}`} key={`na-${product.id}`} className="group">
+                <div className="relative overflow-hidden aspect-[3/4] mb-4 bg-secondary-container">
+                  <span className="absolute top-2 left-2 bg-background px-2 py-1 text-[10px] uppercase tracking-widest z-10">New</span>
+                  <img src={product.main_image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-              )}
-              
-              {featuredProducts[2] && (
-                <div className="group cursor-pointer">
-                  <Link to={`/product/${featuredProducts[2].id}`}>
-                    <div className="relative overflow-hidden bg-secondary-container h-[234px]">
-                      <img 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                        alt={featuredProducts[2].name} 
-                        src={featuredProducts[2].main_image}
-                      />
-                      <div className="absolute inset-0 bg-black/5"></div>
-                    </div>
-                    <div className="mt-4">
-                      <h4 className="font-headline-md text-headline-md text-primary">{featuredProducts[2].name}</h4>
-                      <p className="font-body-md text-body-md text-secondary">UGX {(featuredProducts[2].price * 3700).toLocaleString()}</p>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* About MoC Couture (Editorial Spread) */}
-        <section className="bg-surface-container-low py-24 md:py-40">
-          <div className="max-w-container-max mx-auto px-5 md:px-16 grid grid-cols-1 md:grid-cols-2 items-center gap-16 md:gap-32">
-            <div className="relative flex justify-center">
-              <div className="w-full max-w-sm aspect-[3/4] relative z-10 soft-shadow">
-                <img 
-                  className="w-full h-full object-cover" 
-                  alt="An artisan's hands working with a crochet hook and natural linen yarn" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB76D29kblTInBe1hVLIESwj1bOrwyeUC7xfSe8gIaUxDWuXGzmRkzAr6t4hfSQBeggRRUgHMd_4mqem7qtlJllG0jVvB0cXRH1nVX2lEcIRepuCOU31qp3JE3O6aDOcEl2L_nyy-Eq4X-NyLg-_-hSiXEuzN10fDbN5YVydpT-sFAKMTw4wL4hwv4_xIaSdaVeAv1cxjAPSSM-JcoiiTlrDijQ7KFH__7f_J1zCkpuCC9nBPHAFuySUobyA87vsjXXP6nNuNXQ3qQ"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-secondary-container -z-0 hidden md:block opacity-50"></div>
-            </div>
-            <div>
-              <h3 className="font-label-md text-label-md text-primary uppercase tracking-[0.3em] mb-6">Our Narrative</h3>
-              <h2 className="font-display-lg-mobile md:font-headline-lg text-display-lg-mobile md:text-headline-lg mb-8 italic">The Rhythm of the Hook</h2>
-              <p className="font-body-lg text-body-lg text-tertiary mb-6 leading-relaxed">
-                At MoC Couture, we believe that fashion should be as meaningful as it is beautiful. Our atelier was founded on the principle of intentionality—each stitch is a decision, each garment a story of time.
-              </p>
-              <p className="font-body-md text-body-md text-secondary mb-10 italic border-l-2 border-primary pl-6">
-                "We don't just make clothing; we weave heritage into modern silhouettes, creating artifacts of personal expression that last lifetimes."
-              </p>
-              <Link to="/about">
-                <button className="border border-primary text-primary px-8 py-3 font-label-md text-label-md rounded-DEFAULT hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest">
-                  Read Our Story
-                </button>
+                <h4 className="font-display text-lg mb-1 group-hover:text-primary transition-colors">{product.name}</h4>
+                <p className="text-secondary text-sm">UGX {(product.price * 3700).toLocaleString()}</p>
               </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* 8. Lookbook Preview */}
+        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img 
+              className="w-full h-full object-cover" 
+              alt="MoC Couture Lookbook" 
+              src="/images/crochet-business/6b41605cdb6e16a2aa705c6d5e1353c8.webp"
+            />
+            <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+          <div className="relative z-10 text-center text-white">
+            <h2 className="font-display text-5xl md:text-6xl mb-8 uppercase tracking-widest">Wear The Art</h2>
+            <Link to="/lookbook">
+              <button className="border-2 border-white px-10 py-4 font-body uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all">
+                View Lookbook
+              </button>
+            </Link>
+          </div>
+        </section>
+
+        {/* 9. Craftsmanship Section */}
+        <section className="py-16 md:py-24 bg-background">
+          <div className="max-w-screen-xl mx-auto px-5 md:px-16">
+            <div className="text-center mb-16">
+              <h3 className="font-display text-3xl md:text-4xl mb-4">Our Craftsmanship Process</h3>
+              <p className="text-secondary font-body max-w-2xl mx-auto">The journey of a MoC Couture piece from raw material to wearable art.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant/50 -z-10"></div>
+              
+              {[
+                { step: '01', title: 'Select premium yarn', icon: 'line_weight' },
+                { step: '02', title: 'Hand crochet', icon: 'back_hand' },
+                { step: '03', title: 'Integrate fabric', icon: 'texture' },
+                { step: '04', title: 'Finish by hand', icon: 'check_circle' },
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center text-center bg-background py-4">
+                  <div className="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-6 shadow-sm">
+                    <span className="material-symbols-outlined text-primary text-2xl">{item.icon}</span>
+                  </div>
+                  <span className="text-primary font-display text-lg mb-2">{item.step}</span>
+                  <h4 className="font-body text-lg uppercase tracking-wider">{item.title}</h4>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Process Highlight */}
-        <section className="max-w-container-max mx-auto px-5 md:px-16 py-24 md:py-40 text-center">
-          <h3 className="font-headline-lg text-headline-lg mb-16">Artisanal Integrity</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="flex flex-col items-center">
-              <span className="material-symbols-outlined text-4xl text-primary mb-6">spa</span>
-              <h4 className="font-label-md text-label-md uppercase tracking-widest mb-4">Pure Origin</h4>
-              <p className="font-body-md text-body-md text-secondary">Sourcing only 100% organic cotton, silk, and heritage wool from ethical producers.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="material-symbols-outlined text-4xl text-primary mb-6">pan_tool</span>
-              <h4 className="font-label-md text-label-md uppercase tracking-widest mb-4">Zero Machine</h4>
-              <p className="font-body-md text-body-md text-secondary">Every single piece in our collection is produced entirely by hand in our local atelier.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="material-symbols-outlined text-4xl text-primary mb-6">all_inclusive</span>
-              <h4 className="font-label-md text-label-md uppercase tracking-widest mb-4">Heirloom Quality</h4>
-              <p className="font-body-md text-body-md text-secondary">Designed to transcend trends and be passed down through generations.</p>
+        {/* 10. Why Choose MoC Couture */}
+        <section className="py-16 px-5 md:px-16 bg-surface-container-low">
+          <div className="max-w-screen-xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: 'Handmade', desc: 'Every piece is crafted by human hands, ensuring uniqueness in every stitch.' },
+                { title: 'Unique Designs', desc: 'We blend traditional techniques with contemporary fashion silhouettes.' },
+                { title: 'Premium Materials', desc: 'Sourced from the finest organic yarns and quality fabrics.' },
+                { title: 'Made With Care', desc: 'Produced ethically with fair labor practices and immense attention to detail.' }
+              ].map((feature, idx) => (
+                <div key={idx} className="bg-background p-8 border border-outline-variant/30 text-center hover:-translate-y-2 transition-transform duration-300">
+                  <h4 className="font-display text-xl uppercase tracking-wider mb-4">{feature.title}</h4>
+                  <p className="text-secondary font-body text-sm leading-relaxed">{feature.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
+        </section>
+
+        {/* 11. Testimonials (Future) */}
+        <section className="py-16 px-5 md:px-16 max-w-3xl mx-auto text-center">
+          <span className="text-primary tracking-[0.2em] uppercase text-sm mb-4 block">Client Love</span>
+          <div className="flex justify-center gap-1 text-primary mb-8">
+            {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined">star</span>)}
+          </div>
+          <h3 className="font-display text-2xl md:text-4xl italic leading-relaxed text-on-surface">
+            "Beautiful craftsmanship. The attention to detail on my custom crochet bag is absolutely incredible. It's a true piece of art."
+          </h3>
+          <p className="mt-8 font-body text-secondary uppercase tracking-widest text-sm">— Sarah J.</p>
+        </section>
+
+        {/* 12. Instagram Feed */}
+        <section className="py-12 px-5 md:px-16 max-w-screen-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="font-display text-2xl md:text-3xl mb-2">Follow Our Journey</h3>
+            <a href="#" className="text-secondary hover:text-primary transition-colors text-sm uppercase tracking-widest">@moc_couture</a>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4">
+            {[
+              '/images/crochet-business/7af5666266c522214aa26cbc6445d4ac.jpg',
+              '/images/crochet-business/d6d6d97a7e3c9a261a29f4ca8097e523.jpg',
+              '/images/crochet-business/eafc91400245977140fa871c997a628b.jpg',
+              '/images/crochet-business/fae1465d3bd3a9ada3daaad67e7c3072.jpg',
+              '/images/crochet-business/fe987ba4f86546a3dfbfb3bbff2fc31e.jpg',
+              '/images/crochet-business/071aeb9629cd90ec04a7ae3e125e65e2.jpg',
+            ].map((img, idx) => (
+              <div key={idx} className={`relative overflow-hidden aspect-square ${idx > 3 ? 'hidden lg:block' : ''}`}>
+                <img src={img} alt="Instagram post" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+                  <span className="material-symbols-outlined text-white">favorite</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 13. Newsletter */}
+        <section className="bg-primary text-on-primary py-16 px-5">
+          <div className="max-w-xl mx-auto text-center">
+            <h3 className="font-display text-3xl md:text-4xl mb-4">Join the MoC Couture Community</h3>
+            <p className="mb-8 opacity-90 font-body text-sm md:text-base">Subscribe to receive updates, access to exclusive deals, and more.</p>
+            <form className="flex flex-col sm:flex-row gap-2">
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                className="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:border-white"
+                required
+              />
+              <button type="submit" className="bg-white text-primary px-8 py-3 font-body uppercase tracking-widest text-sm hover:bg-white/90 transition-colors">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+
+        {/* 14. Contact CTA */}
+        <section className="py-16 px-5 text-center bg-surface-container-low">
+          <h3 className="font-display text-3xl mb-6">Looking For A Custom Piece?</h3>
+          <p className="text-secondary font-body mb-8 max-w-md mx-auto">Let's Create Something Beautiful Together. We work with you to design a piece that is uniquely yours.</p>
+          <Link to="/contact">
+            <button className="border border-primary text-primary px-10 py-4 font-body uppercase tracking-widest text-sm hover:bg-primary hover:text-white transition-all">
+              Contact Us
+            </button>
+          </Link>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-5 md:px-16 py-16 text-center mb-16 md:mb-0">
-        <h2 className="font-headline-md text-headline-md text-primary uppercase tracking-[0.2em]">MoC Couture</h2>
-        <div className="flex flex-wrap justify-center gap-8">
-          <Link className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" to="/contact">Contact</Link>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
-        </div>
-        <p className="font-body-md text-body-md text-on-surface-variant max-w-xs md:max-w-none">
-          © 2024 MoC Couture. Handcrafted with intention.
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 };

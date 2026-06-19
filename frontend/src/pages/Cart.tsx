@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import { useCart } from "@/contexts/CartContext";
 import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total, clearCart } = useCart();
@@ -31,7 +32,8 @@ const Cart = () => {
             </Link>
           </div>
         </main>
-      </div>
+      <Footer />
+    </div>
     );
   }
 
@@ -152,6 +154,7 @@ const Cart = () => {
           </div>
         </Card>
       </main>
+      <Footer />
     </div>
   );
 };

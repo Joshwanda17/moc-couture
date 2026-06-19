@@ -1,134 +1,122 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const About = () => {
   return (
     <div className="bg-background text-on-background min-h-screen">
       <Navbar />
       
-      <main className="pt-16 pb-32">
-        {/* Hero Section */}
-        <header className="px-margin-mobile md:px-margin-desktop pt-12 md:pt-24 mb-16 md:mb-32">
-          <div className="max-w-container-max mx-auto">
-            <p className="font-label-md text-label-md text-primary uppercase tracking-[0.2em] mb-4">The Atelier</p>
-            <h1 className="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000">
-              Our Story: A Dialogue Between Thread and Time
-            </h1>
-          </div>
-        </header>
-
-        {/* Story Image Full */}
-        <section className="mb-20 md:mb-40">
-          <div className="w-full h-[530px] md:h-[707px] relative overflow-hidden">
+      <main className="pb-16">
+        {/* Cover Section */}
+        <section className="relative w-full h-screen min-h-[800px] flex items-end pb-24 px-margin-mobile md:px-margin-desktop">
+          <div className="absolute inset-0 z-0">
             <img 
-              alt="Close-up of crochet process" 
-              className="w-full h-full object-cover animate-in fade-in duration-1000 delay-300" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuXIgyFaeZ_Z3LG_QfTarSoA9hbayynmpJ--zExwnBmrFhj0XfNbambesqAZL7ObOfrfCmN1QiWvOFxO7ZUIY3jNyHo65Ha31KGmsgehk3Rhx4iI378Cm9_22HSbh8rSOIvb5s0Kr5u8lbNqujLeIDdRx1h1mpSv_LW4Egk2wP3Ffx7ODvNwqw_PNGxNZ1B27QWL0jLrLQgLEe71XV_JcNEaySKn9uKi7_AgMW_vmagLXuim8l5YRAgMAHPgoy7kYYmvFPzw_389I"
+              src="/images/mercy-bayo.jpg"
+              alt="Mercy Bayo Portrait"
+              className="w-full h-full object-cover object-center md:object-top"
             />
-            <div className="absolute inset-0 bg-black/5"></div>
-          </div>
-        </section>
-
-        {/* The Hands Behind the Hook */}
-        <section className="px-margin-mobile md:px-margin-desktop mb-24 md:mb-48">
-          <div className="max-w-container-max mx-auto md:grid md:grid-cols-12 md:gap-gutter">
-            <div className="md:col-span-5 mb-12 md:mb-0">
-              <img 
-                alt="The Founder in studio" 
-                className="w-full aspect-[4/5] object-cover shadow-[0_20px_40px_rgba(45,45,45,0.04)]" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPK7K3N6Bfjpu-KP6V9MlJaCkjVJ0UoPWboTTt2PkDFhQvQQf9vyXKuJM57x3KtGTPlNvBwFLGeI8LFQBJZhuuollDf1mpkRX73Sar8DFZAJ6_sPATlFahIUF4ER2IUPPC8yJAZKWo31jjJPK07-1DDGDJil2EIUOI5qTpZWFw6pNYL1TnqsgpmoRQgUUokmaLoVgqak0wYgxmcZ00apCgGE4jwvH3MJdf3dMHsAmMF9Io_9AnJbQKI0Tonpq19SHjEfnfkhEyB2w"
-              />
-            </div>
-            <div className="md:col-span-6 md:col-start-7 flex flex-col justify-center">
-              <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-8">The Hands Behind the Hook</h2>
-              <div className="space-y-6 font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                <p>Founded by Mercy Bayo, MoC Couture was born from a singular obsession: the architecture of the stitch. In a world of fleeting trends, we choose the permanence of the handmade.</p>
-                <p>Our philosophy of "Slow Craft" is an invitation to pause. Every garment is a labor of intention, taking upwards of sixty hours to manifest from a single spool of thread into a sculptural silhouette. This isn't just clothing; it is a tactile record of time.</p>
-                <p>Mercy's vision marries the rustic honesty of traditional crochet with the exacting standards of high-fashion draping, creating pieces that feel as much like art as they do armor.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Quote Section */}
-        <section className="bg-secondary-container py-24 md:py-40 mb-24 md:mb-48">
-          <div className="px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto text-center">
-            <span className="material-symbols-outlined text-primary text-5xl mb-8">format_quote</span>
-            <blockquote className="font-display-lg-mobile text-display-lg-mobile md:font-headline-lg md:text-headline-lg text-primary italic leading-tight">
-              "When we crochet, we are not just making garments; we are weaving patience into the very fabric of our lives. Intentionality is our finest thread."
-            </blockquote>
-            <cite className="block mt-8 font-label-md text-label-md uppercase tracking-widest text-on-secondary-container">— Mercy Bayo, Founder</cite>
-          </div>
-        </section>
-
-        {/* Materials Section: Bento Grid */}
-        <section className="px-margin-mobile md:px-margin-desktop mb-24 md:mb-48 max-w-container-max mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Our Materials</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-4">Sourced with conscience. Crafted for longevity.</p>
+            {/* Gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-            {/* Organic Cotton Card */}
-            <div className="bg-surface-container-low p-8 md:p-12 flex flex-col items-center text-center shadow-[0_20px_40px_rgba(45,45,45,0.04)] transition-transform hover:-translate-y-2 duration-500">
-              <img 
-                alt="Organic Cotton" 
-                className="w-48 h-48 rounded-full object-cover mb-8" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFA5mYQCQYdY9tlrjL_i5QkEnURhf_Neb_Nax5bJVVGXnT_UAtixCy3-9s3lC56iwtdKxtid5HKZQdE8glF0TFxvs28ZXer-zxI7-WIEdOZRTddGpREFS4MtoxTokfoPu4jK0Y_ymIs1mL5FEPLNreBKlQm9sr6tSLzPF2PAxJ9AA8VwmjXuNcmvwreixiBk3SXvUUYHzFbNUf8RUR0VyNL9_TIb23aWgbKy_pwLnt_PlVO7KMUFSZrTVHbUvkh2l9dBGIvW2ycmo"
-              />
-              <h3 className="font-headline-md text-headline-md text-on-surface mb-4">GOTS Organic Cotton</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">Long-staple fibers harvested from ethical farms in Egypt. Chosen for its breathability and its ability to hold the crisp structural definition of our signature stitches.</p>
-              <span className="inline-block px-4 py-2 bg-[#f0eded] rounded-full font-label-md text-label-md text-primary">Soft & Structural</span>
+          <div className="relative z-10 max-w-5xl text-white w-full">
+            <h1 className="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg uppercase tracking-wider mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+              The Hands Behind The Art
+            </h1>
+            <p className="font-body-lg text-body-lg md:text-2xl text-white/90 max-w-3xl leading-relaxed italic border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+              Meet Mercy Bayo, founder of MoC Couture, where every creation begins with craftsmanship, imagination, and the belief that handmade fashion tells a story no machine can replicate.
+            </p>
+          </div>
+        </section>
+
+        {/* Editorial Story */}
+        <section className="px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-surface">
+          <div className="max-w-4xl mx-auto space-y-12 font-body-lg text-body-lg md:text-xl text-on-surface-variant leading-relaxed">
+            <p className="first-letter:text-7xl first-letter:font-display-lg first-letter:text-primary first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8]">
+              In a world of mass production, where thousands of identical pieces roll off factory lines every day, Mercy Bayo chose a different path.
+            </p>
+            <p className="font-bold text-on-surface text-2xl md:text-3xl font-display-md">
+              She chose to create by hand.
+            </p>
+            <p>
+              MoC Couture was born from a love for craftsmanship, patience, and the belief that fashion should feel personal. Every piece begins not in a machine, but in the hands of a maker who understands that beauty lives in the details.
+            </p>
+            <p>
+              Mercy does not describe her work as simply "knotted." To her, every creation is carefully handmade. Every stitch is intentional. Every fabric selection is thoughtful. Every finished piece carries hours of dedication, creativity, and care.
+            </p>
+            <p>
+              Her work blends the timeless artistry of crochet with carefully chosen fabrics, creating pieces that feel both classic and contemporary. The result is fashion that cannot be rushed, copied, or mass-produced.
+            </p>
+          </div>
+        </section>
+
+        {/* Craftsmanship Image Break */}
+        <section className="w-full h-[60vh] relative">
+           <img 
+              alt="Hands at work crochet process" 
+              className="w-full h-full object-cover bg-fixed" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuXIgyFaeZ_Z3LG_QfTarSoA9hbayynmpJ--zExwnBmrFhj0XfNbambesqAZL7ObOfrfCmN1QiWvOFxO7ZUIY3jNyHo65Ha31KGmsgehk3Rhx4iI378Cm9_22HSbh8rSOIvb5s0Kr5u8lbNqujLeIDdRx1h1mpSv_LW4Egk2wP3Ffx7ODvNwqw_PNGxNZ1B27QWL0jLrLQgLEe71XV_JcNEaySKn9uKi7_AgMW_vmagLXuim8l5YRAgMAHPgoy7kYYmvFPzw_389I"
+            />
+        </section>
+
+        {/* Philosophy Section */}
+        <section className="px-margin-mobile md:px-margin-desktop py-16 md:py-24 bg-secondary-container">
+          <div className="max-w-4xl mx-auto space-y-8 font-body-lg text-body-lg md:text-xl text-on-secondary-container leading-relaxed">
+            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-16 text-center">
+              Each creation tells its own story.
+            </h2>
+            <p>
+              Some are inspired by texture. Others by color, culture, nature, or the everyday beauty found in ordinary moments. What connects them all is the belief that true craftsmanship should be visible in the final piece.
+            </p>
+            <p>
+              For Mercy, handmade means more than a process. It is a philosophy.
+            </p>
+            <p className="pl-8 border-l-2 border-primary/50 py-4 italic text-2xl font-display-md">
+              It means taking the time to create something meaningful. It means valuing quality over quantity. It means celebrating individuality in a world that often rewards uniformity.
+            </p>
+            <p>
+              When someone wears a MoC Couture piece, they are not simply wearing an accessory or a garment. They are carrying a piece of a creative journey—one shaped by imagination, patience, and human hands.
+            </p>
+          </div>
+        </section>
+
+        {/* Closing Statement */}
+        <section className="px-margin-mobile md:px-margin-desktop py-16 md:py-24 text-center bg-background">
+          <div className="max-w-4xl mx-auto">
+            <p className="font-headline-md text-headline-md md:text-4xl text-on-surface mb-16 leading-tight italic">
+              "MoC Couture exists to remind us that fashion can still be personal. That beauty can still be handcrafted. And that the most memorable pieces are often those made with care, one stitch at a time."
+            </p>
+            <div className="space-y-4">
+              <p className="font-display-md text-display-md text-primary uppercase tracking-[0.2em]">
+                This is not fast fashion.
+              </p>
+              <p className="font-display-lg text-display-lg md:text-6xl text-on-surface uppercase tracking-[0.1em] font-bold">
+                This is handmade artistry.
+              </p>
             </div>
             
-            {/* Mulberry Silk Card */}
-            <div className="bg-surface-container-low p-8 md:p-12 flex flex-col items-center text-center shadow-[0_20px_40px_rgba(45,45,45,0.04)] transition-transform hover:-translate-y-2 duration-500">
-              <img 
-                alt="Mulberry Silk" 
-                className="w-48 h-48 rounded-full object-cover mb-8" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK1bvNvvDi0PWxNKiySy6qsEub15YGfrklHP_Ai7FGyIuvLfA_zbwY_MlKL-YxjecYvWUA8vUEiqFUnTaLsnvxrqb3mhnMTwQyB8J3sxbRf0HdJn1iNQEQ9ubkOzJEAhjTReuNJL0mBLHl4tIRYyx2eo1PVTC6peauIHAYKFny39Ea2Wx1SX5NzLLs5WHZEPPy7t6ongse6-b1l_dneBBRP9KpEk6-5e7_janWHG8lOvPtPNwiknifnQ4c4qUzI6S6a4DuJwHNBvw"
-              />
-              <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Mulberry Silk</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">A material of liquid light. We use grade 6A silk for our evening collections, offering a drape that mimics the movement of water against the skin.</p>
-              <span className="inline-block px-4 py-2 bg-[#f0eded] rounded-full font-label-md text-label-md text-primary">Fluid & Luminous</span>
+            <div className="mt-32">
+               <div className="relative group overflow-hidden">
+                 <img 
+                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuACAxcgmChlH1OWXHBaeR09DnSaKLsw9RNgrQ8rEf6CBXlosj2vC7HIgYbbtgLKnkslrnLqw1W_91zjx27tLPlX6FGW7CZ5bBTL6YxRGG8zgJ-hEdGzHGZOhbMUcMXwYpBYIZb7YHg5a_Y-HM10NOB57zfB4BGLe15U8E6uKFvzq19aJTQaziS81WW95BYpZWPwH_CgUftwUK57tRWRp4KKQ8BRPCn8Y5j75oLrN5FXqErQkjg08JLS9nR3LO46ZIzlKMr_G2rfN2U"
+                   alt="Studio Workspace"
+                   className="w-full max-w-3xl mx-auto aspect-video object-cover grayscale opacity-80 group-hover:scale-105 transition-transform duration-1000"
+                 />
+                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-black/20">
+                   <p className="font-display-md text-white tracking-[0.3em] uppercase text-xl">The Studio</p>
+                 </div>
+               </div>
+               <p className="mt-8 font-label-md text-label-md uppercase tracking-widest text-secondary">
+                 Inside the MoC Couture Studio
+               </p>
             </div>
           </div>
         </section>
 
-        {/* Studio Environment - Final Image */}
-        <section className="px-margin-mobile md:px-margin-desktop mb-24 max-w-container-max mx-auto">
-          <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
-            <img 
-              alt="The Studio atmosphere" 
-              className="w-full h-full object-cover grayscale opacity-80" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuACAxcgmChlH1OWXHBaeR09DnSaKLsw9RNgrQ8rEf6CBXlosj2vC7HIgYbbtgLKnkslrnLqw1W_91zjx27tLPlX6FGW7CZ5bBTL6YxRGG8zgJ-hEdGzHGZOhbMUcMXwYpBYIZb7YHg5a_Y-HM10NOB57zfB4BGLe15U8E6uKFvzq19aJTQaziS81WW95BYpZWPwH_CgUftwUK57tRWRp4KKQ8BRPCn8Y5j75oLrN5FXqErQkjg08JLS9nR3LO46ZIzlKMr_G2rfN2U"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-[2px]">
-              <div className="text-center p-8 max-w-lg">
-                <p className="font-headline-md text-headline-md text-on-surface mb-4">Visit the Atelier</p>
-                <p className="font-body-md text-body-md text-on-surface-variant mb-8">By appointment only. Experience the rhythm of the hook in person at our London workspace.</p>
-                <Link to="/contact">
-                  <button className="px-10 py-4 bg-primary text-white font-label-md text-label-md hover:opacity-90 transition-all uppercase tracking-widest">
-                    Inquire Now
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full bg-surface-container-low mt-20 flex flex-col items-center gap-8 px-margin-mobile py-16 text-center mb-16 md:mb-0">
-        <span className="font-headline-md text-headline-md text-primary uppercase tracking-[0.3em]">MoC Couture</span>
-        <div className="flex flex-wrap justify-center gap-8">
-          <Link className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" to="/contact">Contact</Link>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Instagram</a>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Shipping</a>
-          <a className="font-body-md text-body-md text-secondary hover:text-primary underline transition-all" href="#">Care Guide</a>
-        </div>
-        <p className="font-body-md text-body-md text-on-surface-variant opacity-80 mt-4">© 2024 MoC Couture. Handcrafted with intention.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
