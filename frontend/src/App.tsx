@@ -23,6 +23,7 @@ import TermsOfService from "./pages/legal/TermsOfService";
 import Returns from "./pages/legal/Returns";
 import Shipping from "./pages/legal/Shipping";
 import Craftsmanship from "./pages/Craftsmanship";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,11 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={
+              <ProtectedRoute requireAdmin={true}>
+                <Admin />
+              </ProtectedRoute>
+            } />
             <Route path="/product/:slug" element={<ProductDetails />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collections/:slug" element={<CollectionDetails />} />

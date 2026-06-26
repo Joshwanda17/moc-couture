@@ -7,12 +7,15 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const { OAuth2Client } = require('google-auth-library');
+const { isAdmin } = require('./middleware/auth');
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'moc_couture_secret_123';
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const prisma = new PrismaClient();
 
@@ -94,8 +97,50 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Google Auth
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) {
+    return res.status(400).json({ error: 'Token is required' });
+  }
+
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const email = payload.email;
+    const googleId = payload.sub;
+
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          email,
+          provider: 'google',
+          google_id: googleId,
+          role: 'admin',
+        }
+      });
+    } else if (!user.google_id) {
+      // Link existing account
+      user = await prisma.user.update({
+        where: { email },
+        data: { google_id: googleId, provider: 'google' }
+      });
+    }
+
+    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
+    res.status(200).json({ token, user: { id: user.id, email: user.email, role: user.role } });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // --- UPLOAD ROUTE ---
-app.post('/api/upload', upload.single('image'), (req, res) => {
+app.post('/api/upload', isAdmin, upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No image provided' });
   }
@@ -113,7 +158,7 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
-app.post('/api/categories', async (req, res) => {
+app.post('/api/categories', isAdmin, async (req, res) => {
   const { name } = req.body;
   try {
     const category = await prisma.category.create({ data: { name } });
@@ -123,7 +168,7 @@ app.post('/api/categories', async (req, res) => {
   }
 });
 
-app.delete('/api/categories/:id', async (req, res) => {
+app.delete('/api/categories/:id', isAdmin, async (req, res) => {
   try {
     await prisma.category.delete({ where: { id: req.params.id } });
     res.status(200).json({ message: 'Deleted successfully' });
@@ -192,7 +237,7 @@ app.get('/api/products/:slug', async (req, res) => {
   }
 });
 
-app.post('/api/products', async (req, res) => {
+app.post('/api/products', isAdmin, async (req, res) => {
   const { name, slug, description, story, materials, dimensions, price, category_id, main_image, featured, status, availability, collection_id, images } = req.body;
   
   try {
@@ -223,7 +268,7 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
-app.put('/api/products/:id', async (req, res) => {
+app.put('/api/products/:id', isAdmin, async (req, res) => {
   const { name, slug, description, story, materials, dimensions, price, category_id, main_image, featured, status, availability, collection_id, images } = req.body;
   const id = req.params.id;
   
@@ -260,7 +305,7 @@ app.put('/api/products/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/products/:id', async (req, res) => {
+app.delete('/api/products/:id', isAdmin, async (req, res) => {
   try {
     await prisma.product.delete({ where: { id: req.params.id } });
     res.status(200).json({ message: 'Deleted successfully' });
@@ -318,7 +363,7 @@ app.get('/api/collections/:slug', async (req, res) => {
   }
 });
 
-app.post('/api/collections', async (req, res) => {
+app.post('/api/collections', isAdmin, async (req, res) => {
   const { name, slug, short_description, story, cover_image, hero_image, season, theme, status, featured, product_ids } = req.body;
   
   try {
@@ -346,7 +391,7 @@ app.post('/api/collections', async (req, res) => {
   }
 });
 
-app.put('/api/collections/:id', async (req, res) => {
+app.put('/api/collections/:id', isAdmin, async (req, res) => {
   const { name, slug, short_description, story, cover_image, hero_image, season, theme, status, featured, product_ids } = req.body;
   const id = req.params.id;
   
@@ -380,7 +425,7 @@ app.put('/api/collections/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/collections/:id', async (req, res) => {
+app.delete('/api/collections/:id', isAdmin, async (req, res) => {
   try {
     await prisma.collection.delete({ where: { id: req.params.id } });
     res.status(200).json({ message: 'Deleted successfully' });
@@ -432,7 +477,7 @@ app.get('/api/lookbooks/:slug', async (req, res) => {
   }
 });
 
-app.post('/api/lookbooks', async (req, res) => {
+app.post('/api/lookbooks', isAdmin, async (req, res) => {
   const { title, slug, description, story, cover_image, status, images, product_ids } = req.body;
   
   try {
@@ -459,7 +504,7 @@ app.post('/api/lookbooks', async (req, res) => {
   }
 });
 
-app.put('/api/lookbooks/:id', async (req, res) => {
+app.put('/api/lookbooks/:id', isAdmin, async (req, res) => {
   const { title, slug, description, story, cover_image, status, images, product_ids } = req.body;
   const id = req.params.id;
   
@@ -496,7 +541,7 @@ app.put('/api/lookbooks/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/lookbooks/:id', async (req, res) => {
+app.delete('/api/lookbooks/:id', isAdmin, async (req, res) => {
   try {
     await prisma.lookbook.delete({ where: { id: req.params.id } });
     res.status(200).json({ message: 'Deleted successfully' });

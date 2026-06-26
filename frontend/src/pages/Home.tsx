@@ -3,10 +3,19 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { api } from "@/lib/api";
+import { motion, AnimatePresence } from "framer-motion";
+
+const HERO_IMAGES = [
+  "/images/crochet-business/490f108b6ffcb2bfe511fdb9228c5750.jpg",
+  "/images/crochet-business/6b41605cdb6e16a2aa705c6d5e1353c8.webp",
+  "/images/crochet-business/071aeb9629cd90ec04a7ae3e125e65e2.jpg",
+  "/images/crochet-business/07ee90c84a60e432972c47babc17ed8c.jpg"
+];
 
 const Home = () => {
   const [bestSellers, setBestSellers] = useState<any[]>([]);
   const [newArrivals, setNewArrivals] = useState<any[]>([]);
+  const [currentHeroIdx, setCurrentHeroIdx] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,6 +31,18 @@ const Home = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroIdx((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const slideVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
   return (
     <div className="bg-background text-on-surface min-h-screen font-body overflow-x-hidden">
       <Navbar />
@@ -30,12 +51,19 @@ const Home = () => {
         {/* 3. Hero Section */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img 
-              className="w-full h-full object-cover object-center" 
-              alt="Luxury Crochet Fashion Model" 
-              src="/images/crochet-business/490f108b6ffcb2bfe511fdb9228c5750.jpg"
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
+            <AnimatePresence mode="popLayout">
+              <motion.img 
+                key={currentHeroIdx}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute inset-0 w-full h-full object-cover object-center" 
+                alt="Luxury Crochet Fashion Model" 
+                src={HERO_IMAGES[currentHeroIdx]}
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-black/40 z-10"></div>
           </div>
           
           <div className="relative z-10 text-center px-5 flex flex-col items-center mt-16">
@@ -61,7 +89,13 @@ const Home = () => {
         </section>
 
         {/* 4. Featured Collections */}
-        <section className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto"
+        >
           <div className="text-center mb-16">
             <h3 className="font-display text-3xl md:text-4xl mb-4">Featured Collections</h3>
             <div className="w-16 h-0.5 bg-primary mx-auto"></div>
@@ -85,10 +119,16 @@ const Home = () => {
               </Link>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* 5. Brand Story Section */}
-        <section className="bg-surface-container-low py-16 md:py-24">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="bg-surface-container-low py-16 md:py-24"
+        >
           <div className="max-w-screen-xl mx-auto px-5 md:px-16 grid grid-cols-1 md:grid-cols-2 items-center gap-16">
             <div className="relative">
               <img 
@@ -113,10 +153,16 @@ const Home = () => {
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* 6. Best Sellers Section */}
-        <section className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 px-5 md:px-16 max-w-screen-2xl mx-auto"
+        >
           <div className="text-center mb-16">
             <h3 className="font-display text-3xl md:text-4xl mb-4">Our Most Loved Pieces</h3>
             <div className="w-16 h-0.5 bg-primary mx-auto"></div>
@@ -133,10 +179,16 @@ const Home = () => {
               </Link>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* 7. New Arrivals Section */}
-        <section className="pb-16 px-5 md:px-16 max-w-screen-2xl mx-auto">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="pb-16 px-5 md:px-16 max-w-screen-2xl mx-auto"
+        >
           <div className="flex justify-between items-end mb-12 border-b border-outline-variant/30 pb-4">
             <h3 className="font-display text-3xl md:text-4xl">New Arrivals</h3>
             <Link to="/gallery" className="text-sm font-body uppercase tracking-widest text-secondary hover:text-primary transition-colors">
@@ -156,10 +208,16 @@ const Home = () => {
               </Link>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* 8. Lookbook Preview */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden"
+        >
           <div className="absolute inset-0 z-0">
             <img 
               className="w-full h-full object-cover" 
@@ -176,10 +234,16 @@ const Home = () => {
               </button>
             </Link>
           </div>
-        </section>
+        </motion.section>
 
         {/* 9. Craftsmanship Section */}
-        <section className="py-16 md:py-24 bg-background">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 md:py-24 bg-background"
+        >
           <div className="max-w-screen-xl mx-auto px-5 md:px-16">
             <div className="text-center mb-16">
               <h3 className="font-display text-3xl md:text-4xl mb-4">Our Craftsmanship Process</h3>
@@ -205,10 +269,16 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* 10. Why Choose MoC Couture */}
-        <section className="py-16 px-5 md:px-16 bg-surface-container-low">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 px-5 md:px-16 bg-surface-container-low"
+        >
           <div className="max-w-screen-xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -224,10 +294,16 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* 11. Testimonials (Future) */}
-        <section className="py-16 px-5 md:px-16 max-w-3xl mx-auto text-center">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 px-5 md:px-16 max-w-3xl mx-auto text-center"
+        >
           <span className="text-primary tracking-[0.2em] uppercase text-sm mb-4 block">Client Love</span>
           <div className="flex justify-center gap-1 text-primary mb-8">
             {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined">star</span>)}
@@ -236,10 +312,16 @@ const Home = () => {
             "Beautiful craftsmanship. The attention to detail on my custom crochet bag is absolutely incredible. It's a true piece of art."
           </h3>
           <p className="mt-8 font-body text-secondary uppercase tracking-widest text-sm">— Sarah J.</p>
-        </section>
+        </motion.section>
 
         {/* 12. Instagram Feed */}
-        <section className="py-12 px-5 md:px-16 max-w-screen-2xl mx-auto">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-12 px-5 md:px-16 max-w-screen-2xl mx-auto"
+        >
           <div className="text-center mb-12">
             <h3 className="font-display text-2xl md:text-3xl mb-2">Follow Our Journey</h3>
             <a href="#" className="text-secondary hover:text-primary transition-colors text-sm uppercase tracking-widest">@moc_couture</a>
@@ -261,10 +343,16 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* 13. Newsletter */}
-        <section className="bg-primary text-on-primary py-16 px-5">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="bg-primary text-on-primary py-16 px-5"
+        >
           <div className="max-w-xl mx-auto text-center">
             <h3 className="font-display text-3xl md:text-4xl mb-4">Join the MoC Couture Community</h3>
             <p className="mb-8 opacity-90 font-body text-sm md:text-base">Subscribe to receive updates, access to exclusive deals, and more.</p>
@@ -280,10 +368,16 @@ const Home = () => {
               </button>
             </form>
           </div>
-        </section>
+        </motion.section>
 
         {/* 14. Contact CTA */}
-        <section className="py-16 px-5 text-center bg-surface-container-low">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={slideVariants}
+          className="py-16 px-5 text-center bg-surface-container-low"
+        >
           <h3 className="font-display text-3xl mb-6">Looking For A Custom Piece?</h3>
           <p className="text-secondary font-body mb-8 max-w-md mx-auto">Let's Create Something Beautiful Together. We work with you to design a piece that is uniquely yours.</p>
           <Link to="/contact">
@@ -291,7 +385,7 @@ const Home = () => {
               Contact Us
             </button>
           </Link>
-        </section>
+        </motion.section>
       </main>
 
       <Footer />
